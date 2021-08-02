@@ -57,7 +57,7 @@ public class Account extends BaseTimeEntity {
                 .password(req.getPassword())
                 .grade(GradeType.요기프랜드)
                 .oAuth(OAuthType.None)
-                .role(RoleType.ROME_USER)
+                .role(RoleType.ROLE_USER)
                 .alarmAgree(req.isAlarmAgree())
                 .build();
     }

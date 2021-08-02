@@ -22,6 +22,7 @@ public enum CustomExceptionStatus {
     EMPTY_JWT(false, 2001, "JWT를 입력해주세요."),
     INVALID_JWT(false, 2002, "유효하지 않은 JWT입니다."),
     INVALID_USER_JWT(false,2003,"권한이 없는 유저의 접근입니다."),
+    NOT_AUTHENTICATED_ACCOUNT(false, 2004, "로그인이 필요합니다."),
 
     // users
     USERS_EMPTY_USER_ID(false, 2010, "유저 아이디 값을 확인해주세요."),
@@ -33,8 +34,6 @@ public enum CustomExceptionStatus {
     POST_USERS_INVALID_EMAIL(false, 2016, "이메일 형식을 확인해주세요."),
     POST_USERS_EXISTS_EMAIL(false,2017,"중복된 이메일입니다."),
     POST_USERS_INVALID_NICKNAME(false, 2018, "닉네임 형식을 확인해주세요."),
-    NICKNAME_DUPLICATION(false, 2019, "중복되는 닉네임입니다."),
-    NICKNAME_DUPLICATION_SELF(false, 2020, "원래의 닉네임과 중복됩니다."),
     POST_USERS_INVALID_PASSWORD(false, 2021, "비밀번호 형식을 확인해주세요."),
 
 
@@ -47,7 +46,9 @@ public enum CustomExceptionStatus {
 
     // [POST] /users
     DUPLICATED_EMAIL(false, 3013, "중복된 이메일입니다."),
-    FAILED_TO_LOGIN(false,3014,"없는 이메일이거나 비밀번호가 틀렸습니다."),
+    DUPLICATED_NICKNAME(false, 3014, "중복된 닉네임입니다."),
+    DUPLICATED_NICKNAME_SELF(false, 3015, "원래의 닉네임과 중복됩니다."),
+    FAILED_TO_LOGIN(false,3016,"없는 이메일이거나 비밀번호가 틀렸습니다."),
 
 
 
