@@ -1,6 +1,6 @@
 package com.server.yogiyo.account.domain.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -10,6 +10,8 @@ import org.hibernate.validator.constraints.Length;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+
+import static com.fasterxml.jackson.annotation.JsonProperty.*;
 
 @Getter
 @NoArgsConstructor
@@ -28,7 +30,7 @@ public class SignUpDto {
     private String nickname;
 
     @NotBlank
-    @JsonIgnore
+    @JsonProperty(access = Access.WRITE_ONLY)
     @Length(min=8, max= 50)
     private String password;
 

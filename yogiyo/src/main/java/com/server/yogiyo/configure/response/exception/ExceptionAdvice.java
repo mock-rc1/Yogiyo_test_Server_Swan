@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
+import java.util.Date;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -23,9 +26,7 @@ public class ExceptionAdvice {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     protected CommonResponse customException(CustomException customException) {
         CustomExceptionStatus status = customException.getCustomExceptionStatus();
-        SimpleDateFormat format = new SimpleDateFormat ( "yyyy-MM-dd HH:mm:ss");
-        Calendar time = Calendar.getInstance();
-        log.warn(format.format(time)+" : "+status.getMessage());
+        log.warn(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"))+" : "+status.getMessage());
         return responseService.getExceptionResponse(status);
     }
 
