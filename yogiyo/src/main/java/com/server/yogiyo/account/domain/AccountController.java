@@ -41,13 +41,8 @@ public class AccountController {
     }
 
     private DataResponse<SignInRes> throwValidError(Errors errors) {
-        System.out.println("errors = " + errors);
-        System.out.println("errors.getFieldError().getRejectedValue() = " + errors.getFieldError().getRejectedValue());
-        System.out.println("errors.getFieldError().getArguments() = " + errors.getFieldError().getArguments());
-        System.out.println("errors.getFieldError().getDefaultMessage() = " + errors.getFieldError().getDefaultMessage());
         String errorCode = errors.getFieldError().getCode();
         String errorTarget = errors.getFieldError().getField();
-        System.out.println("errorCode = " + errorCode);
         throw new CustomException(ValidationExceptionProvider.getExceptionStatus(errorCode, errorTarget));
     }
 
