@@ -1,5 +1,6 @@
 package com.server.yogiyo.configure.security;
 
+import com.server.yogiyo.configure.response.exception.CustomAuthenticationEntryPoint;
 import com.server.yogiyo.configure.security.jwt.JwtAuthenticationFilter;
 import com.server.yogiyo.configure.security.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsUtils;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -23,6 +25,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final JwtTokenProvider jwtTokenProvider;
+    private final AuthenticationEntryPoint authenticationEntryPoint;
     
 
     @Value("${mapping.url}")
@@ -59,12 +62,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
-                .authorizeRequests()
-                .antMatchers("/*").permitAll()
-                .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
-                .anyRequest().hasRole("USER")
+                    .authorizeRequests()
+                    .antMatchers("/app/sign-in", "/app/sign-up","/errors/**").permitAll()
+                    .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
+                    .anyRequest().hasRole("USER")
                 .and()
-                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
+                    .exceptionHandling()
+                    .authenticationEntryPoint(new CustomAuthenticationEntryPoint())
+                .and()
+                    .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
 
     }
 

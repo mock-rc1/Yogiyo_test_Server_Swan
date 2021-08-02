@@ -1,10 +1,9 @@
 package com.server.yogiyo.configure.security.jwt;
 
 import com.server.yogiyo.account.domain.enumtypes.RoleType;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import com.server.yogiyo.configure.response.exception.CustomException;
+import com.server.yogiyo.configure.response.exception.CustomExceptionStatus;
+import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -46,26 +45,30 @@ public class JwtTokenProvider {
                 .compact();
     }
 
-    public String getStudentId(String token){
+    public String getNickname(String token){
         return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
     }
 
     public Authentication getAuthentication(String token){
-        UserDetails userDetails = userDetailsService.loadUserByUsername(this.getStudentId(token));
+        UserDetails userDetails = userDetailsService.loadUserByUsername(this.getNickname(token));
         return  new UsernamePasswordAuthenticationToken(userDetails,"",userDetails.getAuthorities());
     }
 
     public String resolveToken(HttpServletRequest req){
-        return req.getHeader("X-AUTH-TOKEN");
+        return req.getHeader("X-ACCESS-TOKEN");
     }
 
-    public boolean validateToken(String jwtToken){
-        try{
+    public boolean validateToken(String jwtToken, HttpServletRequest req) {
+        try {
+            if (jwtToken.isEmpty()) throw new JwtException("empty jwtToken");
             Jws<Claims> claimsJws = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(jwtToken);
             return !claimsJws.getBody().getExpiration().before(new Date());
-        }catch (Exception e){
+        } catch (JwtException e) {
+            if (jwtToken.isEmpty()) {
+                req.setAttribute("exception", CustomExceptionStatus.EMPTY_JWT.getMessage());
+            }
+            else req.setAttribute("exception", CustomExceptionStatus.INVALID_JWT.getMessage());
             return false;
         }
     }
-
 }

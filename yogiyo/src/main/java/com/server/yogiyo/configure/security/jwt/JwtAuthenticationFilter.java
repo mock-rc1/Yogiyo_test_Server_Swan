@@ -1,5 +1,6 @@
 package com.server.yogiyo.configure.security.jwt;
 
+import com.server.yogiyo.configure.response.exception.CustomExceptionStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.GenericFilterBean;
@@ -22,7 +23,8 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         String token = jwtTokenProvider.resolveToken((HttpServletRequest)  request);
-        if(token != null && jwtTokenProvider.validateToken(token)){
+        if (token==null) request.setAttribute("exception", CustomExceptionStatus.NOT_AUTHENTICATED_ACCOUNT.getMessage());
+        else if(jwtTokenProvider.validateToken(token, (HttpServletRequest)  request)){
             Authentication authentication = jwtTokenProvider.getAuthentication(token);
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
