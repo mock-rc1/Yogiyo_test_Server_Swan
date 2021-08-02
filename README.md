@@ -1,3 +1,61 @@
+<h1 align="center">Welcome to Yogiyo_test_Server_Swan 👋</h1>
+<p>
+  <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
+  <a href="https://github.com/kefranabg/readme-md-generator#readme" target="_blank">
+    <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
+  </a>
+  <a href="https://github.com/kefranabg/readme-md-generator/graphs/commit-activity" target="_blank">
+    <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" />
+  </a>
+  <a href="#" target="_blank">
+    <img alt="License: MIT" src="https://img.shields.io/github/license/vividswan/Yogiyo_test_Server_Swan" />
+  </a>
+</p>
+
+> Yogiyo Back-End Project
+
+### 🏠 [Homepage](https://github.com/mock-rc1/Yogiyo_test_Server_Swan)
+
+### ✨ [Demo](https://prod.yogiyo-backend.shop)
+
+## 기술스택
+
+<p>
+  <img src="https://img.shields.io/badge/-SpringBoot-blue"/>&nbsp
+  <img src="https://img.shields.io/badge/-JPA-red"/>&nbsp
+  <img src="https://img.shields.io/badge/-MySQL-yellow"/>&nbsp
+  <img src="https://img.shields.io/badge/-JWT-blue"/>&nbsp
+  <img src="https://img.shields.io/badge/-AWS-orange"/>&nbsp
+  <img src="https://img.shields.io/badge/-Nginx-red"/>&nbsp
+  <img src="https://img.shields.io/badge/-SpringSecurity-black"/>&nbsp
+</p>
+
+## 개발환경
+
+- backend
+  - java11
+  - gradle
+  - spring-boot 2.5.3
+
+
+## Usage
+
+```sh
+$ cd yogiyo
+$ .gradlew clean build
+```
+
+### Access server side using following URL
+
+```
+https://prod.yogiyo-backend.shop
+```
+
+## ERD(v1)
+
+![1](https://user-images.githubusercontent.com/54254402/127853971-cd688a19-347c-4fcb-bedd-f146e7646d53.png)
+
+
 ## 개발일지
 
 ### 2021-07-31 진행상황
@@ -16,3 +74,29 @@
 - ip 주소를 prod 도메인으로 리다이렉션
 - 스프링 시큐리티 초기 설정
 - JWT 설정 및 JWT Provider, Filter 생성
+
+### 2021-08-02
+- - -
+- [ERD v1 완성](https://user-images.githubusercontent.com/54254402/127853971-cd688a19-347c-4fcb-bedd-f146e7646d53.png)
+- 공통 Reponse 처리 기능 추가
+- 예외처리 기능 추가 및 예외처리 코드 Enum 생성
+- Spring Security를 사용하는 Authentication 기능 추가
+
+
+## Author
+
+👤 **vividswan**
+
+* Website: vividswan.github.io
+* Github: [@vividswan](https://github.com/vividswan)
+
+## 🤝 Contributing
+
+Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/mock-rc1/Yogiyo_test_Server_Swan/issues). 
+
+## Show your support
+
+Give a ⭐️ if this project helped you!
+
+***
+_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
