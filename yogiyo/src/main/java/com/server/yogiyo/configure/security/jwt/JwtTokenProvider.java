@@ -1,4 +1,4 @@
-package com.server.yogiyo.configure.security;
+package com.server.yogiyo.configure.security.jwt;
 
 import com.server.yogiyo.account.domain.RoleType;
 import io.jsonwebtoken.Claims;
