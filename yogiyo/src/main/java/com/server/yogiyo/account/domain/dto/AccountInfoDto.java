@@ -17,7 +17,7 @@ import static com.fasterxml.jackson.annotation.JsonProperty.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class SignUpDto {
+public class AccountInfoDto {
 
     private Long accountId;
 
@@ -34,7 +34,7 @@ public class SignUpDto {
     @Length(min=8, max= 50)
     private String password;
 
-    private boolean alarmAgree;
+    private Boolean alarmAgree;
 
     public void changePassword(String newPassword) {
         this.password = newPassword;

@@ -1,6 +1,6 @@
 package com.server.yogiyo.account.domain;
 
-import com.server.yogiyo.account.domain.dto.SignUpDto;
+import com.server.yogiyo.account.domain.dto.AccountInfoDto;
 import com.server.yogiyo.account.domain.enumtypes.GradeType;
 import com.server.yogiyo.account.domain.enumtypes.OAuthType;
 import com.server.yogiyo.account.domain.enumtypes.RoleType;
@@ -49,16 +49,27 @@ public class Account extends BaseTimeEntity {
 
     private boolean alarmAgree;
 
-    public static Account createAccount(SignUpDto req) {
+    public static Account createAccount(AccountInfoDto dto) {
+
         return Account.builder()
                 .status(Status.Valid)
-                .nickname(req.getNickname())
-                .email(req.getEmail())
-                .password(req.getPassword())
+                .nickname(dto.getNickname())
+                .email(dto.getEmail())
+                .password(dto.getPassword())
                 .grade(GradeType.요기프랜드)
                 .oAuth(OAuthType.None)
                 .role(RoleType.ROLE_USER)
-                .alarmAgree(req.isAlarmAgree())
+                .alarmAgree(dto.getAlarmAgree())
+                .build();
+    }
+
+    public AccountInfoDto getAccountInfoDto() {
+
+        return AccountInfoDto.builder()
+                .accountId(this.accountId)
+                .email(this.email)
+                .nickname(this.nickname)
+                .alarmAgree(this.alarmAgree)
                 .build();
     }
 

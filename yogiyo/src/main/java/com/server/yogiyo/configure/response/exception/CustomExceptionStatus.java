@@ -35,6 +35,8 @@ public enum CustomExceptionStatus {
     POST_USERS_EXISTS_EMAIL(false,2017,"중복된 이메일입니다."),
     POST_USERS_INVALID_NICKNAME(false, 2018, "닉네임 형식을 확인해주세요."),
     POST_USERS_INVALID_PASSWORD(false, 2021, "비밀번호 형식을 확인해주세요."),
+    POST_USERS_EMPTY_PASSWORD(false, 2022, "비밀번호를 입력해주세요"),
+    POST_USERS_EMPTY_AGREE(false, 2023, "알람 동의 여부를 확인해주세요."),
 
 
 
