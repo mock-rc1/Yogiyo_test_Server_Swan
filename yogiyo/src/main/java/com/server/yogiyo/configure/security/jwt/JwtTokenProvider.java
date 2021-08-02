@@ -1,6 +1,6 @@
 package com.server.yogiyo.configure.security.jwt;
 
-import com.server.yogiyo.account.domain.RoleType;
+import com.server.yogiyo.account.domain.enumtypes.RoleType;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
