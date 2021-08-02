@@ -32,9 +32,10 @@ public enum CustomExceptionStatus {
     POST_USERS_EMPTY_EMAIL(false, 2015, "이메일을 입력해주세요."),
     POST_USERS_INVALID_EMAIL(false, 2016, "이메일 형식을 확인해주세요."),
     POST_USERS_EXISTS_EMAIL(false,2017,"중복된 이메일입니다."),
-    NICKNAME_VALIDATION_ERROR(false, 2018, "잘못된 닉네임입니다."),
+    POST_USERS_INVALID_NICKNAME(false, 2018, "닉네임 형식을 확인해주세요."),
     NICKNAME_DUPLICATION(false, 2019, "중복되는 닉네임입니다."),
     NICKNAME_DUPLICATION_SELF(false, 2020, "원래의 닉네임과 중복됩니다."),
+    POST_USERS_INVALID_PASSWORD(false, 2021, "비밀번호 형식을 확인해주세요."),
 
 
 
@@ -46,8 +47,7 @@ public enum CustomExceptionStatus {
 
     // [POST] /users
     DUPLICATED_EMAIL(false, 3013, "중복된 이메일입니다."),
-    FAILED_TO_LOGIN(false,3014,"없는 아이디거나 비밀번호가 틀렸습니다."),
-    PASSWORD_NOT_CORRECT(false, 3015, "비밀번호가 틀렸습니다."),
+    FAILED_TO_LOGIN(false,3014,"없는 이메일이거나 비밀번호가 틀렸습니다."),
 
 
 
