@@ -50,4 +50,17 @@ public class Account extends BaseTimeEntity {
 
     private boolean alarmAgree;
 
+    public static Account createAccount(SignUpDto req) {
+        return Account.builder()
+                .status(Status.Valid)
+                .nickname(req.getNickname())
+                .email(req.getEmail())
+                .password(req.getPassword())
+                .grade(GradeType.요기프랜드)
+                .oAuth(OAuthType.None)
+                .role(RoleType.ROME_USER)
+                .alarmAgree(req.isAlarmAgree())
+                .build();
+    }
+
 }
