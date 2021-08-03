@@ -82,6 +82,17 @@ https://prod.yogiyo-backend.shop
 - 예외처리 기능 추가 및 예외처리 코드 Enum 생성
 - Spring Security를 사용하는 Authentication 기능 추가
 
+### 2021-08-03
+- - -
+- 로그인, 회원가입 API 구현
+- 형식적, 의미적 Validation 추가 및 고도화
+- JWT Authentication 관련 Validation 추가
+- Event 조회 API 추가
+- Restaurant API 구현
+  - 특정 조건으로 가게 리스트 조회 API
+  - 페이징 된 전체 가게 조회 API
+  - 가게 세부 내용 조회 API
+- 가게 관련 테스트 데이터 생성
 
 ## Author
 
