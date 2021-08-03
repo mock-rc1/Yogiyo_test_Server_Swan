@@ -2,6 +2,7 @@ package com.server.yogiyo.configure.security.authentication;
 
 import com.server.yogiyo.account.entity.Account;
 import com.server.yogiyo.account.AccountRepository;
+import com.server.yogiyo.configure.entity.Status;
 import com.server.yogiyo.configure.response.exception.CustomException;
 import com.server.yogiyo.configure.response.exception.CustomExceptionStatus;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+import static com.server.yogiyo.configure.entity.Status.*;
+
 @RequiredArgsConstructor
 @Service
 public class CustomUserDetailService implements UserDetailsService {
@@ -19,7 +22,7 @@ public class CustomUserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) {
-        Optional<Account> optionalAccount = accountRepository.findByEmail(email);
+        Optional<Account> optionalAccount = accountRepository.findByEmailAndStatus(email, Valid);
         if (!optionalAccount.isPresent()) throw new CustomException(CustomExceptionStatus.ACCOUNT_NOT_FOUND);
         return new CustomUserDetails(optionalAccount.get());
     }

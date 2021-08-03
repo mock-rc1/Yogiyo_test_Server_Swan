@@ -4,6 +4,7 @@ import com.server.yogiyo.account.entity.Account;
 import com.server.yogiyo.account.dto.SignInReq;
 import com.server.yogiyo.account.dto.SignInRes;
 import com.server.yogiyo.account.dto.AccountAuthDto;
+import com.server.yogiyo.configure.entity.Status;
 import com.server.yogiyo.configure.response.exception.CustomException;
 import com.server.yogiyo.configure.response.exception.CustomExceptionStatus;
 import com.server.yogiyo.configure.security.jwt.JwtTokenProvider;
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
+
+import static com.server.yogiyo.configure.entity.Status.*;
 
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -25,9 +28,9 @@ public class AccountService {
 
     @Transactional
     public AccountAuthDto signUp(AccountAuthDto dto) {
-        if (accountRepository.findByEmail(dto.getEmail()).isPresent()) throw new CustomException(CustomExceptionStatus.DUPLICATED_EMAIL);
+        if (accountRepository.findByEmailAndStatus(dto.getEmail(), Valid).isPresent()) throw new CustomException(CustomExceptionStatus.DUPLICATED_EMAIL);
         if (dto.getNickname() != null){
-            if (accountRepository.findByNickname(dto.getNickname()).isPresent()) throw new CustomException(CustomExceptionStatus.DUPLICATED_NICKNAME);
+            if (accountRepository.findByNicknameAndStatus(dto.getNickname(), Valid).isPresent()) throw new CustomException(CustomExceptionStatus.DUPLICATED_NICKNAME);
         }
 
         dto.setPassword(passwordEncoder.encode(dto.getPassword()));
@@ -40,7 +43,7 @@ public class AccountService {
 
     @Transactional
     public SignInRes signIn(SignInReq req) {
-        Optional<Account> optionalAccount = accountRepository.findByEmail(req.getEmail());
+        Optional<Account> optionalAccount = accountRepository.findByEmailAndStatus(req.getEmail(), Valid);
         if (!optionalAccount.isPresent()) throw new CustomException(CustomExceptionStatus.FAILED_TO_LOGIN);
         Account accountEntity = optionalAccount.get();
         if(!passwordEncoder.matches(req.getPassword(),accountEntity.getPassword())){
@@ -56,7 +59,7 @@ public class AccountService {
     }
 
     public AccountAuthDto getAuthAccount(String email) {
-        Optional<Account> optionalAccount = accountRepository.findByEmail(email);
+        Optional<Account> optionalAccount = accountRepository.findByEmailAndStatus(email, Valid);
         if (!optionalAccount.isPresent()) throw new CustomException(CustomExceptionStatus.ACCOUNT_NOT_FOUND);
         Account account = optionalAccount.get();
         AccountAuthDto accountInfoDto = account.getAccountInfoDto();

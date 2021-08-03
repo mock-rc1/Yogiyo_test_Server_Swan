@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.server.yogiyo.configure.entity.Status.*;
+
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -125,10 +127,10 @@ public class DetailRestaurantRes {
         this.cesco = restaurant.getCesco();
         this.focusAD = restaurant.getFocusAD();
         this.hoursList =
-                restaurant.getHoursList().stream().map(HoursRes::new).collect(Collectors.toList()).stream().sorted().collect(Collectors.toList());
+                restaurant.getHoursList().stream().filter(h -> h.getStatus() != Deleted).map(HoursRes::new).collect(Collectors.toList()).stream().sorted().collect(Collectors.toList());
 
         this.menuList =
-                restaurant.getMenuRelations().stream().map(LookupMenuRes::new).collect(Collectors.toList());
+                restaurant.getMenuRelations().stream().filter(m -> m.getStatus() != Deleted).map(LookupMenuRes::new).collect(Collectors.toList());
     }
 
 }
