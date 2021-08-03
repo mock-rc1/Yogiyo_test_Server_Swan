@@ -28,6 +28,9 @@ public enum CustomExceptionStatus {
     USERS_EMPTY_USER_ID(false, 2010, "유저 아이디 값을 확인해주세요."),
     ACCOUNT_NOT_FOUND(false, 2011, "사용자를 찾을 수 없습니다."),
 
+    // Restaurants
+    Restaurant_NOT_FOUND(false, 2012, "가게를 찾을 수 없습니다."),
+
 
     // [POST] /users
     POST_USERS_EMPTY_EMAIL(false, 2015, "이메일을 입력해주세요."),
