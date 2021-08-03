@@ -40,6 +40,8 @@ public class Restaurant extends BaseTimeEntity {
 
     private Integer deliveryCost;
 
+    private Float distance;
+
     private String infoImage1;
 
     private String infoImage2;

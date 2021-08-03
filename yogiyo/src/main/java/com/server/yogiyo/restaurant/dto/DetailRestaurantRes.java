@@ -34,6 +34,8 @@ public class DetailRestaurantRes {
 
     private Integer deliveryCost;
 
+    private Float distance;
+
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private String infoImage1;
 
@@ -96,6 +98,7 @@ public class DetailRestaurantRes {
         this.deliveryTime = restaurant.getDeliveryTime();
         this.deliveryMinCost = restaurant.getDeliveryMinCost();
         this.deliveryCost = restaurant.getDeliveryCost();
+        this.distance = restaurant.getDistance();
         this.infoImage1 = restaurant.getInfoImage1();
         this.infoImage2 = restaurant.getInfoImage2();
         this.infoImage3 = restaurant.getInfoImage3();
