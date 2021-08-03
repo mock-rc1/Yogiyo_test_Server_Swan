@@ -24,4 +24,6 @@ public class Event extends BaseTimeEntity {
 
     private String thumbnail;
 
+    private Boolean isAd;
+
 }

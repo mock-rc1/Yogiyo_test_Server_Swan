@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.server.yogiyo.configure.entity.Status.*;
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/app")
@@ -22,8 +24,14 @@ public class EventController {
 
     @GetMapping("/events")
     public DataResponse<List<EventRes>> getEventList() {
-        List<Event> eventList = eventRepository.findAllByStatusOrderByUpdatedAtDesc(Status.Valid);
-        return responseService.getDataResponse(eventList.stream().map(EventRes::new).collect(Collectors.toList()));
+        List<EventRes> eventList = eventRepository.findAllByStatusAndIsAdOrderByUpdatedAtDesc(Valid,false);
+        return responseService.getDataResponse(eventList);
+    }
+
+    @GetMapping("/ads")
+    public DataResponse<List<EventRes>> getAdList() {
+        List<EventRes> adList = eventRepository.findAllByStatusAndIsAdOrderByUpdatedAtDesc(Valid,true);
+        return responseService.getDataResponse(adList);
     }
 
 }
