@@ -4,8 +4,6 @@ import com.server.yogiyo.account.entity.Account;
 import com.server.yogiyo.account.dto.SignInReq;
 import com.server.yogiyo.account.dto.SignInRes;
 import com.server.yogiyo.account.dto.AccountAuthDto;
-import com.server.yogiyo.configure.response.DataResponse;
-import com.server.yogiyo.configure.response.ResponseService;
 import com.server.yogiyo.configure.response.exception.CustomException;
 import com.server.yogiyo.configure.response.exception.CustomExceptionStatus;
 import com.server.yogiyo.configure.security.jwt.JwtTokenProvider;
@@ -23,11 +21,10 @@ public class AccountService {
 
     private final AccountRepository accountRepository;
     private final PasswordEncoder passwordEncoder;
-    private final ResponseService responseService;
     private final JwtTokenProvider jwtTokenProvider;
 
     @Transactional
-    public DataResponse<AccountAuthDto> signUp(AccountAuthDto dto) {
+    public AccountAuthDto signUp(AccountAuthDto dto) {
         if (accountRepository.findByEmail(dto.getEmail()).isPresent()) throw new CustomException(CustomExceptionStatus.DUPLICATED_EMAIL);
         if (dto.getNickname() != null){
             if (accountRepository.findByNickname(dto.getNickname()).isPresent()) throw new CustomException(CustomExceptionStatus.DUPLICATED_NICKNAME);
@@ -38,11 +35,11 @@ public class AccountService {
         Account save = accountRepository.save(account);
         dto.setAccountId(save.getAccountId());
         dto.setJwt(jwtTokenProvider.createToken(account.getEmail(),account.getRole()));
-        return responseService.getDataResponse(dto);
+        return dto;
     }
 
     @Transactional
-    public DataResponse<SignInRes> signIn(SignInReq req) {
+    public SignInRes signIn(SignInReq req) {
         Optional<Account> optionalAccount = accountRepository.findByEmail(req.getEmail());
         if (!optionalAccount.isPresent()) throw new CustomException(CustomExceptionStatus.FAILED_TO_LOGIN);
         Account accountEntity = optionalAccount.get();
@@ -55,15 +52,15 @@ public class AccountService {
                 .jwt(jwtTokenProvider.createToken(accountEntity.getEmail(), accountEntity.getRole()))
                 .build();
 
-        return responseService.getDataResponse(res);
+        return res;
     }
 
-    public DataResponse<AccountAuthDto> getAuthAccount(String email) {
+    public AccountAuthDto getAuthAccount(String email) {
         Optional<Account> optionalAccount = accountRepository.findByEmail(email);
         if (!optionalAccount.isPresent()) throw new CustomException(CustomExceptionStatus.ACCOUNT_NOT_FOUND);
         Account account = optionalAccount.get();
         AccountAuthDto accountInfoDto = account.getAccountInfoDto();
         accountInfoDto.setJwt(jwtTokenProvider.createToken(account.getEmail(), account.getRole()));
-        return responseService.getDataResponse(accountInfoDto);
+        return accountInfoDto;
     }
 }
