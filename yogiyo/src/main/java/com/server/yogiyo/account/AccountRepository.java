@@ -1,5 +1,6 @@
-package com.server.yogiyo.account.domain;
+package com.server.yogiyo.account;
 
+import com.server.yogiyo.account.entity.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

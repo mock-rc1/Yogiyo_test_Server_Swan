@@ -10,7 +10,7 @@ public class ResponseService {
 
     public CommonResponse getSuccessResponse(){
         CommonResponse response = new CommonResponse();
-        response.setSuccess(true);
+        response.setIsSuccess(true);
         response.setCode(1000);
         response.setMessage("요청에 성공하였습니다.");
         return response;
@@ -19,7 +19,7 @@ public class ResponseService {
     public <T> DataResponse<T> getDataResponse(T data) {
         DataResponse<T> response = new DataResponse<>();
         response.setResult(data);
-        response.setSuccess(true);
+        response.setIsSuccess(true);
         response.setCode(1000);
         response.setMessage("요청에 성공하였습니다.");
         return response;
@@ -27,7 +27,7 @@ public class ResponseService {
 
     public CommonResponse getExceptionResponse(CustomExceptionStatus status) {
         CommonResponse response = new CommonResponse();
-        response.setSuccess(status.isSuccess());
+        response.setIsSuccess(status.isSuccess());
         response.setCode(status.getCode());
         response.setMessage(status.getMessage());
         return response;

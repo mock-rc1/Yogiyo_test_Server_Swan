@@ -1,7 +1,7 @@
 package com.server.yogiyo.configure.security.authentication;
 
-import com.server.yogiyo.account.domain.Account;
-import com.server.yogiyo.account.domain.AccountRepository;
+import com.server.yogiyo.account.entity.Account;
+import com.server.yogiyo.account.AccountRepository;
 import com.server.yogiyo.configure.response.exception.CustomException;
 import com.server.yogiyo.configure.response.exception.CustomExceptionStatus;
 import lombok.RequiredArgsConstructor;

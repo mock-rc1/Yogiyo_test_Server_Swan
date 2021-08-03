@@ -1,4 +1,4 @@
-package com.server.yogiyo.account.domain.dto;
+package com.server.yogiyo.account.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

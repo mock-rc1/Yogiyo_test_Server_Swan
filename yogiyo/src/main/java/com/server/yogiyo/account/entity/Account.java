@@ -1,9 +1,9 @@
-package com.server.yogiyo.account.domain;
+package com.server.yogiyo.account.entity;
 
-import com.server.yogiyo.account.domain.dto.AccountInfoDto;
-import com.server.yogiyo.account.domain.enumtypes.GradeType;
-import com.server.yogiyo.account.domain.enumtypes.OAuthType;
-import com.server.yogiyo.account.domain.enumtypes.RoleType;
+import com.server.yogiyo.account.dto.AccountAuthDto;
+import com.server.yogiyo.account.entity.enumtypes.GradeType;
+import com.server.yogiyo.account.entity.enumtypes.OAuthType;
+import com.server.yogiyo.account.entity.enumtypes.RoleType;
 import com.server.yogiyo.configure.entity.BaseTimeEntity;
 import com.server.yogiyo.configure.entity.Status;
 import lombok.*;
@@ -49,7 +49,7 @@ public class Account extends BaseTimeEntity {
 
     private boolean alarmAgree;
 
-    public static Account createAccount(AccountInfoDto dto) {
+    public static Account createAccount(AccountAuthDto dto) {
 
         return Account.builder()
                 .status(Status.Valid)
@@ -63,9 +63,9 @@ public class Account extends BaseTimeEntity {
                 .build();
     }
 
-    public AccountInfoDto getAccountInfoDto() {
+    public AccountAuthDto getAccountInfoDto() {
 
-        return AccountInfoDto.builder()
+        return AccountAuthDto.builder()
                 .accountId(this.accountId)
                 .email(this.email)
                 .nickname(this.nickname)

@@ -1,7 +1,6 @@
 package com.server.yogiyo.configure.security.jwt;
 
-import com.server.yogiyo.account.domain.enumtypes.RoleType;
-import com.server.yogiyo.configure.response.exception.CustomException;
+import com.server.yogiyo.account.entity.enumtypes.RoleType;
 import com.server.yogiyo.configure.response.exception.CustomExceptionStatus;
 import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;

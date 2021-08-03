@@ -1,6 +1,6 @@
 package com.server.yogiyo.configure.security.authentication;
 
-import com.server.yogiyo.account.domain.Account;
+import com.server.yogiyo.account.entity.Account;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

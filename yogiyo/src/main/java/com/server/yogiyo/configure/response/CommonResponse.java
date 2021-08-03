@@ -9,7 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class CommonResponse {
 
-    protected boolean isSuccess;
+    protected Boolean isSuccess;
 
     protected int code;
 

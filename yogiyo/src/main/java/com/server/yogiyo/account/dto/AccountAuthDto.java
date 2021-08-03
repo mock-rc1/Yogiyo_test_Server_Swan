@@ -1,10 +1,7 @@
-package com.server.yogiyo.account.domain.dto;
+package com.server.yogiyo.account.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
@@ -14,10 +11,11 @@ import javax.validation.constraints.Pattern;
 import static com.fasterxml.jackson.annotation.JsonProperty.*;
 
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class AccountInfoDto {
+public class AccountAuthDto {
 
     private Long accountId;
 
@@ -36,11 +34,6 @@ public class AccountInfoDto {
 
     private Boolean alarmAgree;
 
-    public void changePassword(String newPassword) {
-        this.password = newPassword;
-    }
+    private String jwt;
 
-    public void setAccountId(Long accountId) {
-        this.accountId = accountId;
-    }
 }

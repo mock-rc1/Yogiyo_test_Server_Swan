@@ -1,8 +1,9 @@
-package com.server.yogiyo.account.domain;
+package com.server.yogiyo.account;
 
-import com.server.yogiyo.account.domain.dto.SignInReq;
-import com.server.yogiyo.account.domain.dto.SignInRes;
-import com.server.yogiyo.account.domain.dto.AccountInfoDto;
+import com.server.yogiyo.account.entity.Account;
+import com.server.yogiyo.account.dto.SignInReq;
+import com.server.yogiyo.account.dto.SignInRes;
+import com.server.yogiyo.account.dto.AccountAuthDto;
 import com.server.yogiyo.configure.response.DataResponse;
 import com.server.yogiyo.configure.response.ResponseService;
 import com.server.yogiyo.configure.response.exception.CustomException;
@@ -26,16 +27,17 @@ public class AccountService {
     private final JwtTokenProvider jwtTokenProvider;
 
     @Transactional
-    public DataResponse<AccountInfoDto> signUp(AccountInfoDto dto) {
+    public DataResponse<AccountAuthDto> signUp(AccountAuthDto dto) {
         if (accountRepository.findByEmail(dto.getEmail()).isPresent()) throw new CustomException(CustomExceptionStatus.DUPLICATED_EMAIL);
         if (dto.getNickname() != null){
             if (accountRepository.findByNickname(dto.getNickname()).isPresent()) throw new CustomException(CustomExceptionStatus.DUPLICATED_NICKNAME);
         }
 
-        dto.changePassword(passwordEncoder.encode(dto.getPassword()));
+        dto.setPassword(passwordEncoder.encode(dto.getPassword()));
         Account account = Account.createAccount(dto);
         Account save = accountRepository.save(account);
         dto.setAccountId(save.getAccountId());
+        dto.setJwt(jwtTokenProvider.createToken(account.getEmail(),account.getRole()));
         return responseService.getDataResponse(dto);
     }
 
@@ -56,9 +58,12 @@ public class AccountService {
         return responseService.getDataResponse(res);
     }
 
-    public DataResponse<AccountInfoDto> getAuthAccount(String email) {
+    public DataResponse<AccountAuthDto> getAuthAccount(String email) {
         Optional<Account> optionalAccount = accountRepository.findByEmail(email);
         if (!optionalAccount.isPresent()) throw new CustomException(CustomExceptionStatus.ACCOUNT_NOT_FOUND);
-        return responseService.getDataResponse(optionalAccount.get().getAccountInfoDto());
+        Account account = optionalAccount.get();
+        AccountAuthDto accountInfoDto = account.getAccountInfoDto();
+        accountInfoDto.setJwt(jwtTokenProvider.createToken(account.getEmail(), account.getRole()));
+        return responseService.getDataResponse(accountInfoDto);
     }
 }
