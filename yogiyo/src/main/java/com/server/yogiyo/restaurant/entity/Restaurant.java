@@ -1,11 +1,13 @@
 package com.server.yogiyo.restaurant.entity;
 
 import com.server.yogiyo.account.entity.Account;
+import com.server.yogiyo.category.entity.CategoryRelation;
 import com.server.yogiyo.configure.entity.BaseTimeEntity;
 import com.server.yogiyo.configure.entity.Status;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -89,4 +91,9 @@ public class Restaurant extends BaseTimeEntity {
     @OneToMany(mappedBy = "restaurant")
     List<Hours> hoursList = new ArrayList<>();
 
+    @OneToMany(mappedBy = "restaurant")
+    List<RestaurantMenuRelation> menuRelations = new ArrayList<>();
+
+    @OneToMany(mappedBy = "restaurant")
+    List<CategoryRelation> categoryRelationList = new ArrayList<>();
 }
