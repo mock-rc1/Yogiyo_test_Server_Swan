@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -20,8 +21,8 @@ public class EventService {
 
 
     public DataResponse<List<EventRes>> getEventList() {
-        List<Event> eventList = eventRepository.findAllByStatus(Status.Valid);
-        return responseService.getDataResponse(eventList.stream().map(Event::toDto).collect(Collectors.toList()));
+        List<Event> eventList = eventRepository.findAllByStatusOrderByUpdatedAtDesc(Status.Valid);
+        return responseService.getDataResponse(eventList.stream().map(EventRes::new).collect(Collectors.toList()));
     }
 
 }

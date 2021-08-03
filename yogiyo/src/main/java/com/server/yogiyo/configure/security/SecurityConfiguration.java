@@ -63,7 +63,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                     .authorizeRequests()
-                    .antMatchers("/app/sign-in", "/app/sign-up","/errors/**").permitAll()
+                    .antMatchers("/app/sign-in", "/app/sign-up","/errors/**", "/app/events").permitAll()
                     .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
                     .anyRequest().hasRole("USER")
                 .and()
