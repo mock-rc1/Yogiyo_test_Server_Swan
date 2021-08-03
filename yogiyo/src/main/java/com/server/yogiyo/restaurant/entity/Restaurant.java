@@ -88,6 +88,7 @@ public class Restaurant extends BaseTimeEntity {
 
     private Boolean focusAD;
 
+    @BatchSize(size = 100)
     @OneToMany(mappedBy = "restaurant")
     List<Hours> hoursList = new ArrayList<>();
 

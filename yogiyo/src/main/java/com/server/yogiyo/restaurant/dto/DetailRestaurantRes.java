@@ -2,6 +2,7 @@ package com.server.yogiyo.restaurant.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.server.yogiyo.configure.entity.Status;
+import com.server.yogiyo.menu.dto.LookupMenuRes;
 import com.server.yogiyo.restaurant.entity.Restaurant;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -87,6 +88,8 @@ public class DetailRestaurantRes {
 
     List<HoursRes> hoursList = new ArrayList<>();
 
+    List<LookupMenuRes> menuList = new ArrayList<>();
+
     public DetailRestaurantRes(Restaurant restaurant) {
 
         this.restaurantId = restaurant.getRestaurantId();
@@ -123,6 +126,9 @@ public class DetailRestaurantRes {
         this.focusAD = restaurant.getFocusAD();
         this.hoursList =
                 restaurant.getHoursList().stream().map(HoursRes::new).collect(Collectors.toList()).stream().sorted().collect(Collectors.toList());
+
+        this.menuList =
+                restaurant.getMenuRelations().stream().map(LookupMenuRes::new).collect(Collectors.toList());
     }
 
 }

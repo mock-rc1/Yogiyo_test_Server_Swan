@@ -15,7 +15,7 @@ import java.util.Optional;
 
 public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
 
-    @Query("select r from Restaurant r join fetch r.hoursList h join fetch r.account a where r.restaurantId = :id")
+    @Query("select r from Restaurant r left join fetch r.menuRelations m left join fetch r.account a where r.restaurantId = :id")
     Optional<DetailRestaurantRes> findByRestaurantId(@Param("id") Long id);
 
 
