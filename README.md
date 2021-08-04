@@ -75,14 +75,14 @@ https://prod.yogiyo-backend.shop
 - 스프링 시큐리티 초기 설정
 - JWT 설정 및 JWT Provider, Filter 생성
 
-### 2021-08-02
+### 2021-08-02 진행상황
 - - -
 - [ERD v1 완성](https://user-images.githubusercontent.com/54254402/127853971-cd688a19-347c-4fcb-bedd-f146e7646d53.png)
 - 공통 Reponse 처리 기능 추가
 - 예외처리 기능 추가 및 예외처리 코드 Enum 생성
 - Spring Security를 사용하는 Authentication 기능 추가
 
-### 2021-08-03
+### 2021-08-03 진행상황
 - - -
 - 로그인, 회원가입 API 구현
 - 형식적, 의미적 Validation 추가 및 고도화
@@ -93,6 +93,18 @@ https://prod.yogiyo-backend.shop
   - 페이징 된 전체 가게 조회 API
   - 가게 세부 내용 조회 API
 - 가게 관련 테스트 데이터 생성
+
+### 2021-08-04 진행상황
+- - -
+- 가게 상세 정보 API 호출 시 가게의 메뉴도 같이 조회할 수 있도록 기능 추가
+- 자료 요청 시 Status를 확인하는 코드를 추가하여 유효한 자료들만 보낼 수 있도록 기능 추가
+- 메뉴 상세 조회 API 구현
+- 주문 생성 API 구현
+- 오류 수정
+  - 잘못된 변수명
+  - JWT 토큰 유효시간
+  - application-key 관련 코드
+  - 주문 추가 오류
 
 ## Author
 
