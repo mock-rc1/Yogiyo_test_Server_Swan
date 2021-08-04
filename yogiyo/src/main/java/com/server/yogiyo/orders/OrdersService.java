@@ -38,7 +38,7 @@ public class OrdersService {
         Optional<Restaurant> optionalRestaurant = restaurantRepository.findByRestaurantIdAndStatus(restaurantId, Valid);
         if (!optionalRestaurant.isPresent()) throw new CustomException(CustomExceptionStatus.Restaurant_NOT_FOUND);
         List<Orders> existOrdersList = ordersRepository.findByAccountAndStatus(optionalAccount.get(), OrderWaiting);
-        existOrdersList.stream().filter(o -> !o.getRestaurant().getName().equals(optionalRestaurant.get().getName())).collect(Collectors.toList());
+        existOrdersList =  existOrdersList.stream().filter(o -> !(o.getRestaurant().equals(optionalRestaurant.get()))).collect(Collectors.toList());
         if (existOrdersList.size() > 0) throw new CustomException(CustomExceptionStatus.EXIST_ANOTHER_Restaurant);
         Optional<Menu> optionalMenu = menuRepository.findByMenuIdAndStatus(menuId, Valid);
         if (!optionalMenu.isPresent()) throw new CustomException(CustomExceptionStatus.MENU_NOT_FOUND);
