@@ -2,6 +2,7 @@ package com.server.yogiyo.orders;
 
 import com.server.yogiyo.account.entity.Account;
 import com.server.yogiyo.configure.entity.Status;
+import com.server.yogiyo.menu.entity.Menu;
 import com.server.yogiyo.menu.entity.Options;
 import com.server.yogiyo.restaurant.entity.Restaurant;
 import lombok.AllArgsConstructor;
@@ -13,6 +14,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.server.yogiyo.configure.entity.Status.Valid;
 import static javax.persistence.FetchType.*;
 
 @Getter
@@ -23,7 +25,7 @@ public class Orders {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long OrdersId;
 
     @Enumerated(EnumType.STRING)
     private Status status;
@@ -36,8 +38,28 @@ public class Orders {
     @JoinColumn(name = "restaurantId")
     private Restaurant restaurant;
 
+    @OneToOne
+    @JoinColumn(name = "menuId")
+    private Menu menu;
+
     private Integer totalPrice;
 
-    @OneToMany(mappedBy = "orders")
+    @OneToMany( cascade = CascadeType.ALL, mappedBy = "orders")
     private List<Options> optionsList = new ArrayList<>();
+
+    public void addOptions(Options options) {
+        this.totalPrice += options.getAddCost();
+        this.optionsList.add(options);
+        options.setOrders(this);
+    }
+
+    public static Orders createOrders(Account account, Restaurant restaurant, Menu menu) {
+        Orders orders = new Orders();
+        orders.account = account;
+        orders.restaurant = restaurant;
+        orders.menu = menu;
+        orders.totalPrice = menu.getPrice();
+        orders.status = Status.OrderWaiting;
+        return orders;
+    }
 }

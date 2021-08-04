@@ -18,6 +18,7 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
     @Query("select r from Restaurant r left join fetch r.menuRelations m left join fetch r.account a where (r.restaurantId = :id and r.status != 'Deleted')")
     Optional<DetailRestaurantRes> findByRestaurantId(@Param("id") Long id);
 
+    Optional<Restaurant> findByRestaurantIdAndStatus(Long id, Status status);
 
     Page<LookupRestaurantRes> findAllByStatusAndGeneralAddressOrderByUpdatedAtDesc(Pageable page, Status status, String generalAddress);
     List<LookupRestaurantRes> findAllByStatusAndGeneralAddressAndIsExpressOrderByUpdatedAtDesc(Status status, String generalAddress, Boolean isExpress);
