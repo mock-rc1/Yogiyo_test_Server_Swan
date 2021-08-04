@@ -25,7 +25,7 @@ public class JwtTokenProvider {
     @Value("${jwt.secret}")
     private String secretKey;
 
-    private long tokenValidity = 60 * 60 * 1000L;
+    private long tokenValidity = 5 * 24 * 60 * 60 * 1000L;
 
     @PostConstruct
     protected void init(){

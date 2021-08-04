@@ -31,6 +31,14 @@ public enum CustomExceptionStatus {
     // Restaurants
     Restaurant_NOT_FOUND(false, 2012, "가게를 찾을 수 없습니다."),
 
+    // Menus
+    MENU_NOT_FOUND(false, 2013, "메뉴를 찾을 수 없습니다."),
+
+    // Options
+    OPTIONS_NOT_FOUND(false, 2013, "주문 옵션을 찾을 수 없습니다."),
+
+    // Orders
+    EXIST_ANOTHER_Restaurant(false, 2014, "다른 가게에서 주문 중 입니다."),
 
     // [POST] /users
     POST_USERS_EMPTY_EMAIL(false, 2015, "이메일을 입력해주세요."),

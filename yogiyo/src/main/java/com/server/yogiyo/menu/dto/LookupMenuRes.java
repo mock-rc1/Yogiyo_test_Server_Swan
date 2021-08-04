@@ -22,7 +22,7 @@ public class LookupMenuRes {
 
     private String subName;
 
-    private String price;
+    private Integer price;
 
     private String grade;
 
