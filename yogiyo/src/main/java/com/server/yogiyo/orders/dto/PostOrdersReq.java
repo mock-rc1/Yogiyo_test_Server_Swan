@@ -14,7 +14,6 @@ public class PostOrdersReq {
 
     Long restaurantId;
     Long menuId;
-    Boolean isConfirmed;
     List<Long> optionsIdList = new LinkedList<>();
 
 }

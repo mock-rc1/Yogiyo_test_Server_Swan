@@ -3,7 +3,9 @@ package com.server.yogiyo.orders;
 import com.server.yogiyo.configure.response.DataResponse;
 import com.server.yogiyo.configure.response.ResponseService;
 import com.server.yogiyo.configure.security.authentication.CustomUserDetails;
+import com.server.yogiyo.orders.dto.OrdersTableRes;
 import com.server.yogiyo.orders.dto.PostOrdersReq;
+import com.server.yogiyo.orders.dto.OrdersListRes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +28,12 @@ public class OrdersController {
         return responseService.getDataResponse(ordersId);
     }
 
+    @GetMapping(value = "/orders/accounts/auth")
+    public DataResponse<OrdersTableRes> getTableByAccount(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        String username = customUserDetails.getUsername();
+        OrdersTableRes ordersTableRes = ordersService.getTableByAccount(username);
+        return responseService.getDataResponse(ordersTableRes);
+    }
 
 }
 

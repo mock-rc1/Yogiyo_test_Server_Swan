@@ -8,6 +8,8 @@ import com.server.yogiyo.menu.entity.Menu;
 import com.server.yogiyo.menu.entity.Options;
 import com.server.yogiyo.menu.repositroy.MenuRepository;
 import com.server.yogiyo.menu.repositroy.OptionsRepository;
+import com.server.yogiyo.orders.dto.OrdersListRes;
+import com.server.yogiyo.orders.dto.OrdersTableRes;
 import com.server.yogiyo.restaurant.RestaurantRepository;
 import com.server.yogiyo.restaurant.entity.Restaurant;
 import lombok.RequiredArgsConstructor;
@@ -34,7 +36,6 @@ public class OrdersService {
     @Transactional
     public Long createOrders(String username, Long restaurantId, Long menuId,List<Long> optionsIdList) {
         Optional<Account> optionalAccount = accountRepository.findByEmailAndStatus(username, Valid);
-        if (!optionalAccount.isPresent()) throw new CustomException(CustomExceptionStatus.ACCOUNT_NOT_FOUND);
         Optional<Restaurant> optionalRestaurant = restaurantRepository.findByRestaurantIdAndStatus(restaurantId, Valid);
         if (!optionalRestaurant.isPresent()) throw new CustomException(CustomExceptionStatus.Restaurant_NOT_FOUND);
         List<Orders> existOrdersList = ordersRepository.findByAccountAndStatus(optionalAccount.get(), OrderWaiting);
@@ -54,5 +55,13 @@ public class OrdersService {
         }
 
         return save.getOrdersId();
+    }
+
+    public OrdersTableRes getTableByAccount(String username) {
+        Account account = accountRepository.findByEmailAndStatus(username, Valid).get();
+        List<Orders> orders = ordersRepository.findByAccountAndStatus(account, OrderWaiting);
+        if (orders.size() == 0) return null;
+        OrdersTableRes ordersTableRes = new OrdersTableRes(orders);
+        return ordersTableRes;
     }
 }
