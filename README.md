@@ -106,6 +106,13 @@ https://prod.yogiyo-backend.shop
   - application-key 관련 코드
   - 주문 추가 오류
 
+### 2021-08-05 진행상황
+- - -
+- 진행 중인 주문 조회 API 구현
+- Account 관련 인증 리팩터링 (UserDetails로 Account 호출)
+- 진행 중인 주문 조회 API 주문 메뉴 옵션 표시 수정
+- ERD 보완 및 수정
+
 ## Author
 
 👤 **vividswan**
