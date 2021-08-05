@@ -23,8 +23,12 @@ public class OrdersListRes {
         this.price = orders.getTotalPrice();
         this.MenuName = orders.getMenu().getName();
         StringBuilder sb = new StringBuilder();
+        int idx = 0;
         for (Options options : orders.getOptionsList()) {
-            sb.append(options.getName() + " ");
+            idx++;
+            if (idx == orders.getOptionsList().size()) sb.append(options.getName());
+            else sb.append(options.getName() + ", ");
+
         }
         this.menuOptions = sb.toString();
     }
