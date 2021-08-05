@@ -7,6 +7,7 @@ import com.server.yogiyo.account.dto.AccountAuthDto;
 import com.server.yogiyo.configure.entity.Status;
 import com.server.yogiyo.configure.response.exception.CustomException;
 import com.server.yogiyo.configure.response.exception.CustomExceptionStatus;
+import com.server.yogiyo.configure.security.authentication.CustomUserDetails;
 import com.server.yogiyo.configure.security.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -58,10 +59,8 @@ public class AccountService {
         return res;
     }
 
-    public AccountAuthDto getAuthAccount(String email) {
-        Optional<Account> optionalAccount = accountRepository.findByEmailAndStatus(email, Valid);
-        if (!optionalAccount.isPresent()) throw new CustomException(CustomExceptionStatus.ACCOUNT_NOT_FOUND);
-        Account account = optionalAccount.get();
+    public AccountAuthDto getAuthAccount(CustomUserDetails customUserDetails) {
+        Account account = customUserDetails.getAccount();
         AccountAuthDto accountInfoDto = account.getAccountInfoDto();
         accountInfoDto.setJwt(jwtTokenProvider.createToken(account.getEmail(), account.getRole()));
         return accountInfoDto;

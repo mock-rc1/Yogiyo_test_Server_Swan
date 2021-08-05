@@ -21,7 +21,7 @@ public class OrdersController {
     @PostMapping(value = "/orders")
     public DataResponse<Long> createOrders(@AuthenticationPrincipal CustomUserDetails customUserDetails, @RequestBody PostOrdersReq req)  {
         Long ordersId = ordersService.
-                createOrders(customUserDetails.getUsername(),
+                createOrders(customUserDetails,
                         req.getRestaurantId(),
                         req.getMenuId(),
                         req.getOptionsIdList());
@@ -30,8 +30,7 @@ public class OrdersController {
 
     @GetMapping(value = "/orders/accounts/auth")
     public DataResponse<OrdersTableRes> getTableByAccount(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        String username = customUserDetails.getUsername();
-        OrdersTableRes ordersTableRes = ordersService.getTableByAccount(username);
+        OrdersTableRes ordersTableRes = ordersService.getTableByAccount(customUserDetails);
         return responseService.getDataResponse(ordersTableRes);
     }
 

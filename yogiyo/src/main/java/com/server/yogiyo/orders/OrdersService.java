@@ -4,6 +4,7 @@ import com.server.yogiyo.account.AccountRepository;
 import com.server.yogiyo.account.entity.Account;
 import com.server.yogiyo.configure.response.exception.CustomException;
 import com.server.yogiyo.configure.response.exception.CustomExceptionStatus;
+import com.server.yogiyo.configure.security.authentication.CustomUserDetails;
 import com.server.yogiyo.menu.entity.Menu;
 import com.server.yogiyo.menu.entity.Options;
 import com.server.yogiyo.menu.repositroy.MenuRepository;
@@ -34,16 +35,16 @@ public class OrdersService {
     private final OptionsRepository optionsRepository;
 
     @Transactional
-    public Long createOrders(String username, Long restaurantId, Long menuId,List<Long> optionsIdList) {
-        Optional<Account> optionalAccount = accountRepository.findByEmailAndStatus(username, Valid);
+    public Long createOrders(CustomUserDetails customUserDetails, Long restaurantId, Long menuId, List<Long> optionsIdList) {
+        Account account = customUserDetails.getAccount();
         Optional<Restaurant> optionalRestaurant = restaurantRepository.findByRestaurantIdAndStatus(restaurantId, Valid);
         if (!optionalRestaurant.isPresent()) throw new CustomException(CustomExceptionStatus.Restaurant_NOT_FOUND);
-        List<Orders> existOrdersList = ordersRepository.findByAccountAndStatus(optionalAccount.get(), OrderWaiting);
+        List<Orders> existOrdersList = ordersRepository.findByAccountAndStatus(account, OrderWaiting);
         existOrdersList =  existOrdersList.stream().filter(o -> !(o.getRestaurant().equals(optionalRestaurant.get()))).collect(Collectors.toList());
         if (existOrdersList.size() > 0) throw new CustomException(CustomExceptionStatus.EXIST_ANOTHER_Restaurant);
         Optional<Menu> optionalMenu = menuRepository.findByMenuIdAndStatus(menuId, Valid);
         if (!optionalMenu.isPresent()) throw new CustomException(CustomExceptionStatus.MENU_NOT_FOUND);
-        Orders orders = Orders.createOrders(optionalAccount.get(), optionalRestaurant.get(), optionalMenu.get());
+        Orders orders = Orders.createOrders(account, optionalRestaurant.get(), optionalMenu.get());
         Orders save = ordersRepository.save(orders);
 
 
@@ -57,8 +58,8 @@ public class OrdersService {
         return save.getOrdersId();
     }
 
-    public OrdersTableRes getTableByAccount(String username) {
-        Account account = accountRepository.findByEmailAndStatus(username, Valid).get();
+    public OrdersTableRes getTableByAccount(CustomUserDetails customUserDetails) {
+        Account account = customUserDetails.getAccount();
         List<Orders> orders = ordersRepository.findByAccountAndStatus(account, OrderWaiting);
         if (orders.size() == 0) return null;
         OrdersTableRes ordersTableRes = new OrdersTableRes(orders);

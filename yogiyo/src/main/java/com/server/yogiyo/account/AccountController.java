@@ -39,7 +39,7 @@ public class AccountController {
 
     @GetMapping(value = "/accounts/auth")
     public DataResponse<AccountAuthDto> getAuthAccount(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
-        return responseService.getDataResponse(accountService.getAuthAccount(customUserDetails.getUsername()));
+        return responseService.getDataResponse(accountService.getAuthAccount(customUserDetails));
     }
 
 }
