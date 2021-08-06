@@ -27,7 +27,7 @@ public class AccountController {
     @PostMapping(value = "/sign-up")
     public DataResponse<AccountAuthDto> signUp(@RequestBody @Valid AccountAuthDto dto, Errors errors){
         if (errors.hasErrors()) ValidationExceptionProvider.throwValidError(errors);
-        if (dto.getAlarmAgree() == null) throw new CustomException(CustomExceptionStatus.POST_USERS_EMPTY_AGREE);
+        if (dto.getAlarmAgree() == null || !dto.getAlarmAgree()) throw new CustomException(CustomExceptionStatus.POST_USERS_EMPTY_AGREE);
         return responseService.getDataResponse(accountService.signUp(dto));
     }
 

@@ -8,6 +8,7 @@ import com.server.yogiyo.menu.entity.Menu;
 import com.server.yogiyo.menu.entity.Options;
 import com.server.yogiyo.menu.repositroy.MenuRepository;
 import com.server.yogiyo.menu.repositroy.OptionsRepository;
+import com.server.yogiyo.orders.dto.GetCompleteRes;
 import com.server.yogiyo.orders.entity.CompleteOrders;
 import com.server.yogiyo.orders.dto.OrdersTableRes;
 import com.server.yogiyo.orders.entity.Orders;
@@ -20,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -44,7 +46,7 @@ public class OrdersService {
         if (!optionalRestaurant.isPresent()) throw new CustomException(CustomExceptionStatus.Restaurant_NOT_FOUND);
         List<Orders> existOrdersList = ordersRepository.findByAccountAndStatus(account, OrderWaiting);
         existOrdersList =  existOrdersList.stream().filter(o -> !(o.getRestaurant().equals(optionalRestaurant.get()))).collect(Collectors.toList());
-        if (existOrdersList.size() > 0) throw new CustomException(CustomExceptionStatus.EXIST_ANOTHER_Restaurant);
+        if (existOrdersList.size() > 0) throw new CustomException(CustomExceptionStatus.EXIST_ANOTHER_RESTAURANT);
         Optional<Menu> optionalMenu = menuRepository.findByMenuIdAndStatus(menuId, Valid);
         if (!optionalMenu.isPresent()) throw new CustomException(CustomExceptionStatus.MENU_NOT_FOUND);
         Orders orders = Orders.createOrders(account, optionalRestaurant.get(), optionalMenu.get());
@@ -61,7 +63,6 @@ public class OrdersService {
         return save.getOrdersId();
     }
 
-    @Transactional
     public OrdersTableRes getTableByAccount(CustomUserDetails customUserDetails) {
         Account account = customUserDetails.getAccount();
         List<Orders> orders = ordersRepository.findByAccountAndStatus(account, OrderWaiting);
