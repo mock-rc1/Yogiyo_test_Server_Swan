@@ -1,6 +1,5 @@
 package com.server.yogiyo.orders;
 
-import com.server.yogiyo.account.AccountRepository;
 import com.server.yogiyo.account.entity.Account;
 import com.server.yogiyo.configure.response.exception.CustomException;
 import com.server.yogiyo.configure.response.exception.CustomExceptionStatus;
@@ -9,8 +8,12 @@ import com.server.yogiyo.menu.entity.Menu;
 import com.server.yogiyo.menu.entity.Options;
 import com.server.yogiyo.menu.repositroy.MenuRepository;
 import com.server.yogiyo.menu.repositroy.OptionsRepository;
-import com.server.yogiyo.orders.dto.OrdersListRes;
+import com.server.yogiyo.orders.entity.CompleteOrders;
 import com.server.yogiyo.orders.dto.OrdersTableRes;
+import com.server.yogiyo.orders.entity.Orders;
+import com.server.yogiyo.orders.entity.PaymentMathodType;
+import com.server.yogiyo.orders.repository.CompleteOrdersRepository;
+import com.server.yogiyo.orders.repository.OrdersRepository;
 import com.server.yogiyo.restaurant.RestaurantRepository;
 import com.server.yogiyo.restaurant.entity.Restaurant;
 import lombok.RequiredArgsConstructor;
@@ -28,11 +31,11 @@ import static com.server.yogiyo.configure.entity.Status.*;
 @Service
 public class OrdersService {
 
-    private final AccountRepository accountRepository;
     private final RestaurantRepository restaurantRepository;
     private final MenuRepository menuRepository;
     private final OrdersRepository ordersRepository;
     private final OptionsRepository optionsRepository;
+    private final CompleteOrdersRepository completeOrdersRepository;
 
     @Transactional
     public Long createOrders(CustomUserDetails customUserDetails, Long restaurantId, Long menuId, List<Long> optionsIdList) {
@@ -58,11 +61,26 @@ public class OrdersService {
         return save.getOrdersId();
     }
 
+    @Transactional
     public OrdersTableRes getTableByAccount(CustomUserDetails customUserDetails) {
         Account account = customUserDetails.getAccount();
         List<Orders> orders = ordersRepository.findByAccountAndStatus(account, OrderWaiting);
         if (orders.size() == 0) return null;
         OrdersTableRes ordersTableRes = new OrdersTableRes(orders);
         return ordersTableRes;
+    }
+
+    @Transactional
+    public Long createCompleteOrdersByAccount(CustomUserDetails customUserDetails, PaymentMathodType paymentMathodType, String requests) {
+        Account account = customUserDetails.getAccount();
+        List<Orders> orders = ordersRepository.findByAccountAndStatus(account, OrderWaiting);
+        if (orders.size() == 0) throw new CustomException(CustomExceptionStatus.NOT_EXIST_ORDERS);
+        CompleteOrders completeOrders = CompleteOrders.createCompleteOrders(account, orders, paymentMathodType, requests);
+        CompleteOrders save = completeOrdersRepository.save(completeOrders);
+        for (Orders order : orders) {
+            order.setStatus(OrderComplete);
+            order.setCompleteOrders(save);
+        }
+        return save.getCompleteId();
     }
 }

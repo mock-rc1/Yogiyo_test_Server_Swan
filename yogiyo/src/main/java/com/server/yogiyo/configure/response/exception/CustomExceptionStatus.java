@@ -39,6 +39,9 @@ public enum CustomExceptionStatus {
 
     // Orders
     EXIST_ANOTHER_Restaurant(false, 2014, "다른 가게에서 주문 중 입니다."),
+    NOT_EXIST_ORDERS(false, 2024, "장바구니에 주문이 없습니다."),
+    NOT_EXIST_PAYMENT_TYPE(false, 2025, "결제 방식을 설정해주세요."),
+
 
     // [POST] /users
     POST_USERS_EMPTY_EMAIL(false, 2015, "이메일을 입력해주세요."),
