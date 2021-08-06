@@ -5,17 +5,17 @@ import com.server.yogiyo.configure.response.ResponseService;
 import com.server.yogiyo.configure.response.exception.CustomException;
 import com.server.yogiyo.configure.response.exception.CustomExceptionStatus;
 import com.server.yogiyo.configure.security.authentication.CustomUserDetails;
+import com.server.yogiyo.orders.dto.GetCompleteRes;
 import com.server.yogiyo.orders.dto.OrdersTableRes;
 import com.server.yogiyo.orders.dto.PostCompleteReq;
 import com.server.yogiyo.orders.dto.PostOrdersReq;
-import com.server.yogiyo.orders.dto.OrdersListRes;
-import com.server.yogiyo.util.ValidationExceptionProvider;
+import com.server.yogiyo.orders.entity.CompleteOrders;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -48,6 +48,12 @@ public class OrdersController {
             throw new CustomException(CustomExceptionStatus.NOT_EXIST_PAYMENT_TYPE);
         Long completeOrdersId =  ordersService.createCompleteOrdersByAccount(customUserDetails, postCompleteReq.getPaymentMathodType(), postCompleteReq.getRequests());
         return responseService.getDataResponse(completeOrdersId);
+    }
+
+    @GetMapping(value = "/orders/completion/accounts/auth")
+    public DataResponse<List<GetCompleteRes>> getCompleteOrdersByAccount(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
+        List<GetCompleteRes> completeOrdersList = ordersService.getCompleteOrdersByAccount(customUserDetails);
+        return responseService.getDataResponse(completeOrdersList);
     }
 
 }

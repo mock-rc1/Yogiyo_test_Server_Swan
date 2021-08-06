@@ -18,6 +18,22 @@ public class OrdersListRes {
     private String menuOptions;
     private Integer cnt;
 
+    public static OrdersListRes getResultOrderListRes(Orders orders) {
+        OrdersListRes ordersListRes = new OrdersListRes();
+        ordersListRes.price = orders.getTotalPrice();
+        ordersListRes.MenuName = orders.getMenu().getName();
+        StringBuilder sb = new StringBuilder();
+        int idx = 0;
+        for (Options options : orders.getOptionsList()) {
+            idx++;
+            if (idx == orders.getOptionsList().size()) sb.append(options.getName());
+            else sb.append(options.getName() + "\n");
+
+        }
+        ordersListRes.menuOptions = sb.toString();
+        return ordersListRes;
+    }
+
     public OrdersListRes(Orders orders) {
         this.price = orders.getTotalPrice();
         this.MenuName = orders.getMenu().getName();

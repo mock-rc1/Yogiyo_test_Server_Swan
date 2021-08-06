@@ -84,4 +84,15 @@ public class OrdersService {
         }
         return save.getCompleteId();
     }
+
+    public List<GetCompleteRes> getCompleteOrdersByAccount(CustomUserDetails customUserDetails) {
+        Account account = customUserDetails.getAccount();
+        List<CompleteOrders> completeOrdersList = completeOrdersRepository.findAllByAccount(account);
+        List<GetCompleteRes> result = new ArrayList<>();
+        for (CompleteOrders completeOrders : completeOrdersList) {
+            GetCompleteRes completeRes = GetCompleteRes.createCompleteRes(completeOrders);
+            result.add(completeRes);
+        }
+        return result;
+    }
 }
