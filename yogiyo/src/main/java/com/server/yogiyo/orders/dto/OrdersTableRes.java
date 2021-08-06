@@ -1,6 +1,6 @@
 package com.server.yogiyo.orders.dto;
 
-import com.server.yogiyo.orders.Orders;
+import com.server.yogiyo.orders.entity.Orders;
 import com.server.yogiyo.restaurant.entity.Restaurant;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

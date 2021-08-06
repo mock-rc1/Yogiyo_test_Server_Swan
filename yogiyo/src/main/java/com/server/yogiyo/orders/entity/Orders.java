@@ -1,4 +1,4 @@
-package com.server.yogiyo.orders;
+package com.server.yogiyo.orders.entity;
 
 import com.server.yogiyo.account.entity.Account;
 import com.server.yogiyo.configure.entity.Status;
@@ -14,7 +14,6 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.server.yogiyo.configure.entity.Status.Valid;
 import static javax.persistence.FetchType.*;
 
 @Getter
@@ -61,5 +60,17 @@ public class Orders {
         orders.totalPrice = menu.getPrice();
         orders.status = Status.OrderWaiting;
         return orders;
+    }
+
+    @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "completeOrdersId")
+    private CompleteOrders completeOrders;
+
+    public void setCompleteOrders(CompleteOrders completeOrders) {
+        this.completeOrders = completeOrders;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }

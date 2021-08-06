@@ -1,8 +1,7 @@
 package com.server.yogiyo.orders.dto;
 
-import com.server.yogiyo.configure.entity.Status;
 import com.server.yogiyo.menu.entity.Options;
-import com.server.yogiyo.orders.Orders;
+import com.server.yogiyo.orders.entity.Orders;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

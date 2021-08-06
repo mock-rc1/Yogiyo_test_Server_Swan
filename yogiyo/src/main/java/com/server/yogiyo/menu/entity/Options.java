@@ -2,7 +2,7 @@ package com.server.yogiyo.menu.entity;
 
 import com.server.yogiyo.configure.entity.BaseTimeEntity;
 import com.server.yogiyo.configure.entity.Status;
-import com.server.yogiyo.orders.Orders;
+import com.server.yogiyo.orders.entity.Orders;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
