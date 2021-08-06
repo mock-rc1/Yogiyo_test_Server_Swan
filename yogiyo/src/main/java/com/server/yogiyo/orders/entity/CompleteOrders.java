@@ -42,9 +42,14 @@ public class CompleteOrders extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private PaymentMathodType paymentMethod;
 
+    private String accountPhoneNumber;
+
+    private String accountAddress;
+
     private String requests;
 
     private String originInform;
+
 
     @OneToMany(mappedBy = "completeOrders")
     private List<Orders> ordersList = new ArrayList<>();
@@ -64,6 +69,8 @@ public class CompleteOrders extends BaseTimeEntity {
                 .restaurant(restaurant)
                 .paymentMethod(paymentMethod)
                 .paymentPrice(sum)
+                .accountPhoneNumber(account.getPhoneNumber())
+                .accountAddress(account.getGeneralAddress() +" "+ account.getDetailedAddress())
                 .requests(requests)
                 .originInform(restaurant.getOriginInform())
                 .build();
