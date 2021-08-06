@@ -4,7 +4,6 @@ import com.server.yogiyo.account.entity.Account;
 import com.server.yogiyo.account.dto.SignInReq;
 import com.server.yogiyo.account.dto.SignInRes;
 import com.server.yogiyo.account.dto.AccountAuthDto;
-import com.server.yogiyo.configure.entity.Status;
 import com.server.yogiyo.configure.response.exception.CustomException;
 import com.server.yogiyo.configure.response.exception.CustomExceptionStatus;
 import com.server.yogiyo.configure.security.authentication.CustomUserDetails;

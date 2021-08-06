@@ -33,7 +33,7 @@ public class AccountController {
 
     @PostMapping(value = "/sign-in")
     public DataResponse<SignInRes> signIn(@RequestBody @Valid SignInReq req, Errors errors) {
-        if (errors.hasErrors()) return ValidationExceptionProvider.throwValidError(errors);
+        if (errors.hasErrors()) ValidationExceptionProvider.throwValidError(errors);
         return responseService.getDataResponse(accountService.signIn(req));
     }
 

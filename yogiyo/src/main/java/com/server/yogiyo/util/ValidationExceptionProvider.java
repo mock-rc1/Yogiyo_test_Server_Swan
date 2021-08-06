@@ -1,14 +1,12 @@
 package com.server.yogiyo.util;
 
-import com.server.yogiyo.account.dto.SignInRes;
-import com.server.yogiyo.configure.response.DataResponse;
 import com.server.yogiyo.configure.response.exception.CustomException;
 import com.server.yogiyo.configure.response.exception.CustomExceptionStatus;
 import org.springframework.validation.Errors;
 
 public class ValidationExceptionProvider {
 
-        public static DataResponse<SignInRes> throwValidError(Errors errors) {
+        public static void throwValidError(Errors errors) {
         String errorCode = errors.getFieldError().getCode();
         String errorTarget = errors.getFieldError().getField();
         throw new CustomException(ValidationExceptionProvider.getExceptionStatus(errorCode, errorTarget));
@@ -26,7 +24,7 @@ public class ValidationExceptionProvider {
         else if (code.equals("Email")) {
             return CustomExceptionStatus.POST_USERS_INVALID_EMAIL;
         }
-        return null;
+        return CustomExceptionStatus.RESPONSE_ERROR;
     }
 
 }
