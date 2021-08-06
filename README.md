@@ -113,6 +113,13 @@ https://prod.yogiyo-backend.shop
 - 진행 중인 주문 조회 API 주문 메뉴 옵션 표시 수정
 - ERD 보완 및 수정
 
+### 2021-08-06 진행상황
+- - -
+- 진행 중인 주문을 주문처리하는 API 완성
+- 주문 완료 Entity 및 관련 메서드에 주문 사용자 전화번호, 주소 추가
+- Exception Status 수정 및 보안
+- Feat 로그인 한 유저의 완료된 주문들 조회 API 완성
+
 ## Author
 
 👤 **vividswan**
