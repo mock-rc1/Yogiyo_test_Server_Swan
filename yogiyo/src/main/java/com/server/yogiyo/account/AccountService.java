@@ -13,8 +13,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-
 import static com.server.yogiyo.configure.entity.Status.*;
 
 @RequiredArgsConstructor
@@ -43,16 +41,15 @@ public class AccountService {
 
     @Transactional
     public SignInRes signIn(SignInReq req) {
-        Optional<Account> optionalAccount = accountRepository.findByEmailAndStatus(req.getEmail(), Valid);
-        if (!optionalAccount.isPresent()) throw new CustomException(CustomExceptionStatus.FAILED_TO_LOGIN);
-        Account accountEntity = optionalAccount.get();
-        if(!passwordEncoder.matches(req.getPassword(),accountEntity.getPassword())){
+        Account account = accountRepository.findByEmailAndStatus(req.getEmail(), Valid)
+                .orElseThrow(()-> new CustomException(CustomExceptionStatus.FAILED_TO_LOGIN));
+        if(!passwordEncoder.matches(req.getPassword(),account.getPassword())){
             throw new CustomException(CustomExceptionStatus.FAILED_TO_LOGIN);
         }
 
         SignInRes res = SignInRes.builder()
-                .accountId(accountEntity.getAccountId())
-                .jwt(jwtTokenProvider.createToken(accountEntity.getEmail(), accountEntity.getRole()))
+                .accountId(account.getAccountId())
+                .jwt(jwtTokenProvider.createToken(account.getEmail(), account.getRole()))
                 .build();
 
         return res;

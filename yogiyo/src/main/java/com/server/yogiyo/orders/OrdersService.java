@@ -42,21 +42,20 @@ public class OrdersService {
     @Transactional
     public Long createOrders(CustomUserDetails customUserDetails, Long restaurantId, Long menuId, List<Long> optionsIdList) {
         Account account = customUserDetails.getAccount();
-        Optional<Restaurant> optionalRestaurant = restaurantRepository.findByRestaurantIdAndStatus(restaurantId, Valid);
-        if (!optionalRestaurant.isPresent()) throw new CustomException(CustomExceptionStatus.Restaurant_NOT_FOUND);
+        Restaurant restaurant = restaurantRepository.findByRestaurantIdAndStatus(restaurantId, Valid)
+                .orElseThrow(() -> new CustomException(CustomExceptionStatus.Restaurant_NOT_FOUND));
         List<Orders> existOrdersList = ordersRepository.findByAccountAndStatus(account, OrderWaiting);
-        existOrdersList =  existOrdersList.stream().filter(o -> !(o.getRestaurant().equals(optionalRestaurant.get()))).collect(Collectors.toList());
+        existOrdersList =  existOrdersList.stream().filter(o -> !(o.getRestaurant().equals(restaurant))).collect(Collectors.toList());
         if (existOrdersList.size() > 0) throw new CustomException(CustomExceptionStatus.EXIST_ANOTHER_RESTAURANT);
-        Optional<Menu> optionalMenu = menuRepository.findByMenuIdAndStatus(menuId, Valid);
-        if (!optionalMenu.isPresent()) throw new CustomException(CustomExceptionStatus.MENU_NOT_FOUND);
-        Orders orders = Orders.createOrders(account, optionalRestaurant.get(), optionalMenu.get());
+        Menu menu = menuRepository.findByMenuIdAndStatus(menuId, Valid)
+                .orElseThrow(() -> new CustomException(CustomExceptionStatus.MENU_NOT_FOUND));
+        Orders orders = Orders.createOrders(account, restaurant, menu);
         Orders save = ordersRepository.save(orders);
 
 
         for (Long id : optionsIdList) {
-            Optional<Options> optionalOptions = optionsRepository.findByOptionsIdAndStatus(id, Valid);
-            if(!optionalOptions.isPresent()) throw new CustomException(CustomExceptionStatus.OPTIONS_NOT_FOUND);
-            Options options = Options.createOrderOptions(save, optionalOptions.get());
+            Options options = optionsRepository.findByOptionsIdAndStatus(id, Valid)
+                    .orElseThrow(() -> new CustomException(CustomExceptionStatus.OPTIONS_NOT_FOUND));
             orders.addOptions(options);
         }
 

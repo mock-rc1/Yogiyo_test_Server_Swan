@@ -35,9 +35,7 @@ public class RestaurantService {
     }
 
     public DetailRestaurantRes getDetailRestaurant(Long id) {
-        Optional<DetailRestaurantRes> optionalDetailRestaurantRes = restaurantRepository.findByRestaurantId(id);
-        if (!optionalDetailRestaurantRes.isPresent())
-            throw new CustomException(CustomExceptionStatus.Restaurant_NOT_FOUND);
-        return optionalDetailRestaurantRes.get();
+        return restaurantRepository.findByRestaurantId(id)
+                .orElseThrow(() -> new CustomException(CustomExceptionStatus.Restaurant_NOT_FOUND));
     }
 }

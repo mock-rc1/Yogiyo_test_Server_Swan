@@ -8,8 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 @Service
@@ -19,8 +17,7 @@ public class MenuService {
 
 
     public DetailMenuRes getDetailMenu(Long id) {
-        Optional<DetailMenuRes> optionalDetailMenuRes = menuRepository.findByMenuId(id);
-        if(!optionalDetailMenuRes.isPresent()) throw new CustomException(CustomExceptionStatus.MENU_NOT_FOUND);
-        return optionalDetailMenuRes.get();
+        return menuRepository.findByMenuId(id)
+                .orElseThrow(() -> new CustomException(CustomExceptionStatus.MENU_NOT_FOUND));
     }
 }
