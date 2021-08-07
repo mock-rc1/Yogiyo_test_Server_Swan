@@ -42,6 +42,9 @@ public enum CustomExceptionStatus {
     NOT_EXIST_ORDERS(false, 2024, "장바구니에 주문이 없습니다."),
     NOT_EXIST_PAYMENT_TYPE(false, 2025, "결제 방식을 설정해주세요."),
 
+    // Category
+     NOT_EXIST_CATEGORY(false, 2026, "카테고리를 찾을 수 없습니다."),
+
 
     // [POST] /users
     POST_USERS_EMPTY_EMAIL(false, 2015, "이메일을 입력해주세요."),

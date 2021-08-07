@@ -1,5 +1,6 @@
 package com.server.yogiyo.restaurant;
 
+import com.server.yogiyo.category.entity.Category;
 import com.server.yogiyo.configure.entity.Status;
 import com.server.yogiyo.restaurant.entity.Restaurant;
 import com.server.yogiyo.restaurant.dto.DetailRestaurantRes;
@@ -26,4 +27,9 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
     List<LookupRestaurantRes> findAllByStatusAndGeneralAddressOrderByOrderQuantityDesc(Status status, String generalAddress);
     List<LookupRestaurantRes> findTopByStatusAndGeneralAddressAndFocusADOrderByUpdatedAtDesc(Status status, String generalAddress, Boolean focusAd);
 
+    @Query("select r from Restaurant  r join fetch r.categoryRelationList c where (c.category = :category and r.status = :status and r.generalAddress = :address)")
+    List<LookupRestaurantRes> findAllByCategoryAndStatusAndGeneralAddress(Category category, Status status, String address);
+
+    @Query("select r from Restaurant  r join fetch r.categoryRelationList c where (c.category = :category and r.status = :status and r.generalAddress = :address)")
+    List<Restaurant> findAllEntityByCategoryAndStatusAndGeneralAddress(Category category, Status status, String address);
 }

@@ -39,4 +39,15 @@ public class LookupMenuRes {
         this.reviewCount = restaurantMenuRelation.getMenu().getReviewCount();
     }
 
+    public LookupMenuRes(Menu menu) {
+        this.menuId = menu.getMenuId();
+        this.status = menu.getStatus();
+        this.thumbnail = menu.getThumbnail();
+        this.name = menu.getName();
+        this.subName = menu.getSubName();
+        this.price = menu.getPrice();
+        this.grade = menu.getGrade();
+        this.reviewCount = menu.getReviewCount();
+    }
+
 }
