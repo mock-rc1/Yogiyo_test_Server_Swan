@@ -18,6 +18,8 @@
 
 ### ✨ [Demo](https://prod.yogiyo-backend.shop)
 
+### 📘 [API DOCUMENT](https://docs.google.com/spreadsheets/d/1s8GNufaq29cz1syn87m0NE5NpaMzJrwugm5NDU_7r5k/edit?usp=sharing)
+
 ## 기술스택
 
 <p>
@@ -119,6 +121,13 @@ https://prod.yogiyo-backend.shop
 - 주문 완료 Entity 및 관련 메서드에 주문 사용자 전화번호, 주소 추가
 - Exception Status 수정 및 보안
 - Feat 로그인 한 유저의 완료된 주문들 조회 API 완성
+
+### 2021-08-07 진행상황
+- - -
+- 전체 카테고리, 메뉴 카테고리 조회 API 완성
+- Enum Type에 관련된 오류 수정
+- 카테고리로 가게 리스트 조회, 메뉴 리스트 조회 API 완성
+- API 문서 최신화
 
 ## Author
 
