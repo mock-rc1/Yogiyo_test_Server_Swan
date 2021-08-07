@@ -22,6 +22,7 @@ public class CategoryRelation extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long relationId;
 
+    @Enumerated(EnumType.STRING)
     private Status status;
 
     @ManyToOne(fetch = LAZY)

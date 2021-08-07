@@ -3,6 +3,9 @@ package com.server.yogiyo.event;
 import com.server.yogiyo.configure.entity.Status;
 import lombok.*;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+
 @Getter
 @Setter
 @NoArgsConstructor
