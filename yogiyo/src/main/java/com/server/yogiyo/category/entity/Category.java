@@ -25,4 +25,6 @@ public class Category extends BaseTimeEntity {
 
     private String image;
 
+    private Boolean isFood;
+
 }
