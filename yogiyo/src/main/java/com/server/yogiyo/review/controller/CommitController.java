@@ -23,4 +23,11 @@ public class CommitController {
         Long commentId = commentService.createParentComment(customUserDetails, reviewId, req);
         return responseService.getDataResponse(commentId);
     }
+
+    @PostMapping("/comments/{commentId}/nested-comments")
+    public DataResponse<Long> createNestedComment(@AuthenticationPrincipal CustomUserDetails customUserDetails,
+                                                  @PathVariable(name = "commentId") Long commentId, @RequestBody PostCommentReq req) {
+        Long nestedCommentId = commentService.createNestedComment(customUserDetails, commentId, req);
+        return responseService.getDataResponse(nestedCommentId);
+    }
 }

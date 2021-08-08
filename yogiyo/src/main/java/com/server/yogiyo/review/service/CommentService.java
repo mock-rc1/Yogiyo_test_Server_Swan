@@ -4,6 +4,7 @@ import com.server.yogiyo.account.entity.Account;
 import com.server.yogiyo.configure.response.exception.CustomException;
 import com.server.yogiyo.configure.response.exception.CustomExceptionStatus;
 import com.server.yogiyo.configure.security.authentication.CustomUserDetails;
+import com.server.yogiyo.restaurant.entity.Restaurant;
 import com.server.yogiyo.review.dto.PostCommentReq;
 import com.server.yogiyo.review.entity.Comment;
 import com.server.yogiyo.review.entity.Review;
@@ -33,4 +34,16 @@ public class CommentService {
         Comment save = commentRepository.save(new Comment(account, review, null, req));
         return save.getCommentId();
     }
+
+    @Transactional
+    public Long createNestedComment(CustomUserDetails customUserDetails, Long commentId, PostCommentReq req) {
+        Account account = customUserDetails.getAccount();
+        Comment parentComment = commentRepository.findCommentIncludeReviewById(commentId)
+                .orElseThrow(() -> new CustomException(CustomExceptionStatus.NOT_EXIST_COMMENT));
+        Review review = parentComment.getReview();
+
+        Comment save = commentRepository.save(new Comment(account, review, parentComment, req));
+        return save.getCommentId();
+    }
+
 }
