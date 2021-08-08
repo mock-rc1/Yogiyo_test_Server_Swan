@@ -129,6 +129,16 @@ https://prod.yogiyo-backend.shop
 - 카테고리로 가게 리스트 조회, 메뉴 리스트 조회 API 완성
 - API 문서 최신화
 
+### 2021-08-08 진행상황
+- - -
+- 리뷰 생성 API 완성
+- 리뷰 댓글 작성 API 완성
+- 대댓글 생성 API 완성
+- 소스 코드 보완
+  - JPA @OneToOne fetch 방식 변경
+  - 리뷰 생성 API 호출 URI, 호출 방식 변경
+  - 리뷰 가게의 사장님이 아닐 땐 리뷰 댓글 작성 시 Exception 처리
+
 ## Author
 
 👤 **vividswan**
