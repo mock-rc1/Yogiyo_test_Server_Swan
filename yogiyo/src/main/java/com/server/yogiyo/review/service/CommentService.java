@@ -4,7 +4,6 @@ import com.server.yogiyo.account.entity.Account;
 import com.server.yogiyo.configure.response.exception.CustomException;
 import com.server.yogiyo.configure.response.exception.CustomExceptionStatus;
 import com.server.yogiyo.configure.security.authentication.CustomUserDetails;
-import com.server.yogiyo.restaurant.entity.Restaurant;
 import com.server.yogiyo.review.dto.PostCommentReq;
 import com.server.yogiyo.review.entity.Comment;
 import com.server.yogiyo.review.entity.Review;
@@ -14,7 +13,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
 
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -32,6 +30,8 @@ public class CommentService {
                 .orElseThrow(() -> new CustomException(CustomExceptionStatus.NOT_EXIST_REVIEW));
 
         Comment save = commentRepository.save(new Comment(account, review, null, req));
+        if(!review.getCompleteOrders().getRestaurant().getAccount().getAccountId().equals(account.getAccountId()))
+            throw new CustomException(CustomExceptionStatus.ACCOUNT_NOT_VALID);
         return save.getCommentId();
     }
 
