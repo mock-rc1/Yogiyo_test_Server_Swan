@@ -17,10 +17,11 @@ public class ReviewController {
     private final ReviewService reviewService;
     private final ResponseService responseService;
 
-    @PostMapping("/reviews")
-    public DataResponse<?> createReview(@AuthenticationPrincipal CustomUserDetails customUserDetails,
+    @PostMapping("/reviews/complete-Orders/{completeOrdersId}")
+    public DataResponse<Long> createReview(@AuthenticationPrincipal CustomUserDetails customUserDetails,
+                                        @PathVariable(name = "completeOrdersId") Long completeOrdersId,
                                         @RequestBody PostReviewReq postReviewReq) {
-        Long reviewId = reviewService.createReview(customUserDetails, postReviewReq);
+        Long reviewId = reviewService.createReview(customUserDetails, completeOrdersId,postReviewReq);
         return responseService.getDataResponse(reviewId);
     }
 

@@ -22,8 +22,8 @@ public class ReviewService {
     private final ReviewRepository reviewRepository;
 
     @Transactional
-    public Long createReview(CustomUserDetails customUserDetails, PostReviewReq req) {
-        CompleteOrders completeOrders = completeOrdersRepository.findById(req.getCompleteOrdersId())
+    public Long createReview(CustomUserDetails customUserDetails, Long completeOrdersId,PostReviewReq req) {
+        CompleteOrders completeOrders = completeOrdersRepository.findById(completeOrdersId)
                 .orElseThrow(() -> new CustomException(CustomExceptionStatus.NOT_EXIST_COMPLETE_ORDERS));
         Account account = customUserDetails.getAccount();
         if (!completeOrders.getAccount().getAccountId().equals(account.getAccountId()))

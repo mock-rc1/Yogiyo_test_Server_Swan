@@ -10,8 +10,6 @@ import lombok.NoArgsConstructor;
 @Getter
 public class PostReviewReq {
 
-    private Long completeOrdersId;
-
     private Integer taste;
 
     private Integer portions;
