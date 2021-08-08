@@ -27,6 +27,7 @@ public enum CustomExceptionStatus {
     // users
     USERS_EMPTY_USER_ID(false, 2010, "유저 아이디 값을 확인해주세요."),
     ACCOUNT_NOT_FOUND(false, 2011, "사용자를 찾을 수 없습니다."),
+    ACCOUNT_NOT_VALID(false, 2028, "유효한 사용자가 아닙니다."),
 
     // Restaurants
     Restaurant_NOT_FOUND(false, 2012, "가게를 찾을 수 없습니다."),
@@ -41,6 +42,7 @@ public enum CustomExceptionStatus {
     EXIST_ANOTHER_RESTAURANT(false, 2014, "다른 가게에서 주문 중 입니다."),
     NOT_EXIST_ORDERS(false, 2024, "장바구니에 주문이 없습니다."),
     NOT_EXIST_PAYMENT_TYPE(false, 2025, "결제 방식을 설정해주세요."),
+    NOT_EXIST_COMPLETE_ORDERS(false, 2027, "잘못된 주문 번호입니다."),
 
     // Category
      NOT_EXIST_CATEGORY(false, 2026, "카테고리를 찾을 수 없습니다."),
