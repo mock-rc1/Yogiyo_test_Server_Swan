@@ -47,6 +47,9 @@ public enum CustomExceptionStatus {
     // Category
      NOT_EXIST_CATEGORY(false, 2026, "카테고리를 찾을 수 없습니다."),
 
+    // Review
+    NOT_EXIST_REVIEW(false, 2029, "리뷰를 찾을 수 없습니다."),
+
 
     // [POST] /users
     POST_USERS_EMPTY_EMAIL(false, 2015, "이메일을 입력해주세요."),
