@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 import static com.server.yogiyo.configure.entity.Status.*;
+import static javax.persistence.FetchType.LAZY;
 
 @Builder
 @AllArgsConstructor
@@ -27,7 +28,7 @@ public class Review extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    @OneToOne
+    @OneToOne(fetch = LAZY)
     @JoinColumn(name = "completeOrdersId")
     private CompleteOrders completeOrders;
 

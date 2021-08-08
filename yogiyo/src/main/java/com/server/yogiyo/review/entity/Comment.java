@@ -14,6 +14,7 @@ import java.util.List;
 
 import static com.server.yogiyo.configure.entity.Status.*;
 import static javax.persistence.CascadeType.*;
+import static javax.persistence.FetchType.*;
 
 @Getter
 @NoArgsConstructor
@@ -28,15 +29,15 @@ public class Comment extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    @OneToOne
+    @OneToOne(fetch = LAZY)
     @JoinColumn(name = "accountId")
     private Account account;
 
-    @OneToOne
+    @OneToOne(fetch = LAZY)
     @JoinColumn(name = "reviewId")
     private Review review;
 
-    @ManyToOne
+    @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "parentCommentId")
     private Comment parentComment;
 

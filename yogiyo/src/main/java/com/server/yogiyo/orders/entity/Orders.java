@@ -37,7 +37,7 @@ public class Orders {
     @JoinColumn(name = "restaurantId")
     private Restaurant restaurant;
 
-    @OneToOne
+    @OneToOne(fetch = LAZY)
     @JoinColumn(name = "menuId")
     private Menu menu;
 
