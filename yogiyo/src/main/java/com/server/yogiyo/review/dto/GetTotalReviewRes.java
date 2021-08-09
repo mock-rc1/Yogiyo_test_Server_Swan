@@ -18,6 +18,8 @@ public class GetTotalReviewRes {
 
     private Double avgDelivery;
 
+    List<String> imageList = new ArrayList<>();
+
     List<GetReviewRes> reviewList = new ArrayList<>();
 
 
@@ -31,6 +33,10 @@ public class GetTotalReviewRes {
                 this.avgTaste += getReviewRes.getTaste();
                 this.avgPortions += getReviewRes.getPortions();
                 this.avgDelivery += getReviewRes.getDelivery();
+                if (getReviewRes.getImage1() != null) imageList.add(getReviewRes.getImage1());
+                if (getReviewRes.getImage2() != null) imageList.add(getReviewRes.getImage2());
+                if (getReviewRes.getImage3() != null) imageList.add(getReviewRes.getImage3());
+                if (getReviewRes.getImage4() != null) imageList.add(getReviewRes.getImage4());
             }
             avgTaste = Math.ceil(avgTaste * 100 / list.size())/100.0;
             avgPortions = Math.ceil(avgPortions * 100 / list.size())/100.0;

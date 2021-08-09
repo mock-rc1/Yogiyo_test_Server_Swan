@@ -2,10 +2,14 @@ package com.server.yogiyo.review.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.server.yogiyo.configure.entity.Status;
+import com.server.yogiyo.orders.entity.Orders;
 import com.server.yogiyo.review.entity.Review;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -40,6 +44,8 @@ public class GetReviewRes {
 
     private Long reportCount;
 
+    private List<String> menuNameList = new ArrayList<>();
+
     public GetReviewRes(Review review) {
 
         this.reviewId = review.getReviewId();
@@ -62,6 +68,10 @@ public class GetReviewRes {
         this.likeCount = review.getLikeCount();
 
         this.reportCount = review.getReportCount();
+
+        for (Orders orders : review.getCompleteOrders().getOrdersList()) {
+            this.menuNameList.add(orders.getMenu().getName());
+        }
 
     }
 
