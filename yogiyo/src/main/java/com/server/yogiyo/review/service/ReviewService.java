@@ -6,12 +6,18 @@ import com.server.yogiyo.configure.response.exception.CustomExceptionStatus;
 import com.server.yogiyo.configure.security.authentication.CustomUserDetails;
 import com.server.yogiyo.orders.entity.CompleteOrders;
 import com.server.yogiyo.orders.repository.CompleteOrdersRepository;
+import com.server.yogiyo.restaurant.RestaurantRepository;
+import com.server.yogiyo.restaurant.entity.Restaurant;
+import com.server.yogiyo.review.dto.GetReviewRes;
+import com.server.yogiyo.review.dto.GetTotalReviewRes;
 import com.server.yogiyo.review.entity.Review;
 import com.server.yogiyo.review.dto.PostReviewReq;
 import com.server.yogiyo.review.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -20,6 +26,7 @@ public class ReviewService {
 
     private final CompleteOrdersRepository completeOrdersRepository;
     private final ReviewRepository reviewRepository;
+    private final RestaurantRepository restaurantRepository;
 
     @Transactional
     public Long createReview(CustomUserDetails customUserDetails, Long completeOrdersId,PostReviewReq req) {
@@ -31,5 +38,11 @@ public class ReviewService {
 
         Review save = reviewRepository.save(new Review(req, completeOrders));
         return save.getReviewId();
+    }
+
+    public GetTotalReviewRes findReviewListByRestaurantId(Long id) {
+        Restaurant restaurant = restaurantRepository.findById(id)
+                .orElseThrow(() -> new CustomException(CustomExceptionStatus.Restaurant_NOT_FOUND));
+        return new GetTotalReviewRes(reviewRepository.findAllByRestaurant(restaurant));
     }
 }
