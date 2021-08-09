@@ -1,5 +1,6 @@
 package com.server.yogiyo.review.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.server.yogiyo.configure.entity.Status;
 import com.server.yogiyo.review.entity.Review;
 import lombok.AllArgsConstructor;
@@ -21,9 +22,16 @@ public class GetReviewRes {
 
     private Integer delivery;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String image1;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String image2;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String image3;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String image4;
 
     private String contents;
