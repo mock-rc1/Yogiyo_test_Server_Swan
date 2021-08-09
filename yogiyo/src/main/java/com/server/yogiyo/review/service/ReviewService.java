@@ -6,9 +6,8 @@ import com.server.yogiyo.configure.response.exception.CustomExceptionStatus;
 import com.server.yogiyo.configure.security.authentication.CustomUserDetails;
 import com.server.yogiyo.orders.entity.CompleteOrders;
 import com.server.yogiyo.orders.repository.CompleteOrdersRepository;
-import com.server.yogiyo.restaurant.RestaurantRepository;
+import com.server.yogiyo.restaurant.repository.RestaurantRepository;
 import com.server.yogiyo.restaurant.entity.Restaurant;
-import com.server.yogiyo.review.dto.GetReviewRes;
 import com.server.yogiyo.review.dto.GetTotalReviewRes;
 import com.server.yogiyo.review.entity.Review;
 import com.server.yogiyo.review.dto.PostReviewReq;
@@ -16,8 +15,6 @@ import com.server.yogiyo.review.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Transactional(readOnly = true)
 @RequiredArgsConstructor

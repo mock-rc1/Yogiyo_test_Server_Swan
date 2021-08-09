@@ -15,7 +15,7 @@ import com.server.yogiyo.orders.entity.Orders;
 import com.server.yogiyo.orders.entity.PaymentMathodType;
 import com.server.yogiyo.orders.repository.CompleteOrdersRepository;
 import com.server.yogiyo.orders.repository.OrdersRepository;
-import com.server.yogiyo.restaurant.RestaurantRepository;
+import com.server.yogiyo.restaurant.repository.RestaurantRepository;
 import com.server.yogiyo.restaurant.entity.Restaurant;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.server.yogiyo.configure.entity.Status.*;

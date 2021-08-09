@@ -88,9 +88,15 @@ public class DetailRestaurantRes {
 
     private Boolean focusAD;
 
+    private Boolean isLike;
+
     List<HoursRes> hoursList = new ArrayList<>();
 
     List<LookupMenuRes> menuList = new ArrayList<>();
+
+    public void setLike(Boolean like) {
+        isLike = like;
+    }
 
     public DetailRestaurantRes(Restaurant restaurant) {
 

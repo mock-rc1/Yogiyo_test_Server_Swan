@@ -1,4 +1,4 @@
-package com.server.yogiyo.restaurant;
+package com.server.yogiyo.restaurant.repository;
 
 import com.server.yogiyo.category.entity.Category;
 import com.server.yogiyo.configure.entity.Status;

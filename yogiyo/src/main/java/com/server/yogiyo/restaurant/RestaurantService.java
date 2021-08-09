@@ -1,9 +1,15 @@
 package com.server.yogiyo.restaurant;
 
+import com.server.yogiyo.account.entity.Account;
+import com.server.yogiyo.configure.entity.Status;
 import com.server.yogiyo.configure.response.exception.CustomException;
 import com.server.yogiyo.configure.response.exception.CustomExceptionStatus;
+import com.server.yogiyo.configure.security.authentication.CustomUserDetails;
 import com.server.yogiyo.restaurant.dto.DetailRestaurantRes;
 import com.server.yogiyo.restaurant.dto.LookupRestaurantRes;
+import com.server.yogiyo.restaurant.entity.AccountRestaurantRelation;
+import com.server.yogiyo.restaurant.repository.AccountRestaurantRelationRepository;
+import com.server.yogiyo.restaurant.repository.RestaurantRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +25,7 @@ import static com.server.yogiyo.configure.entity.Status.Valid;
 public class RestaurantService {
 
     private final RestaurantRepository restaurantRepository;
+    private final AccountRestaurantRelationRepository accountRestaurantRelationRepository;
 
     public List<LookupRestaurantRes> getConditionList(String condition, String address) {
         List<LookupRestaurantRes> restaurants = null;
@@ -34,8 +41,16 @@ public class RestaurantService {
         return restaurants;
     }
 
-    public DetailRestaurantRes getDetailRestaurant(Long id) {
-        return restaurantRepository.findByRestaurantId(id)
+    public DetailRestaurantRes getDetailRestaurant(CustomUserDetails customUserDetails, Long id) {
+        DetailRestaurantRes detailRestaurantRes = restaurantRepository.findByRestaurantId(id)
                 .orElseThrow(() -> new CustomException(CustomExceptionStatus.Restaurant_NOT_FOUND));
+        detailRestaurantRes.setLike(false);
+        if (customUserDetails != null) {
+            Account account = customUserDetails.getAccount();
+            List<AccountRestaurantRelation> isLike = accountRestaurantRelationRepository.findByAccountAndRestaurantAndStatusAndIsLike(account, restaurantRepository.findById(id).get(), Valid, true);
+            if (isLike.size() > 0) detailRestaurantRes.setLike(true);
+        }
+
+        return detailRestaurantRes;
     }
 }
