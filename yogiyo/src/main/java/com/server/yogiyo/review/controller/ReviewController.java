@@ -21,7 +21,7 @@ public class ReviewController {
     private final ReviewService reviewService;
     private final ResponseService responseService;
 
-    @PostMapping("/reviews/complete-Orders/{completeOrdersId}")
+    @PostMapping("/reviews/complete-orders/{completeOrdersId}")
     public DataResponse<Long> createReview(@AuthenticationPrincipal CustomUserDetails customUserDetails,
                                         @PathVariable(name = "completeOrdersId") Long completeOrdersId,
                                         @RequestBody PostReviewReq postReviewReq) {
