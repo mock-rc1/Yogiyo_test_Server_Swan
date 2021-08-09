@@ -90,6 +90,10 @@ public class Restaurant extends BaseTimeEntity {
 
     private Boolean focusAD;
 
+    public void addLikeCount() {
+        this.likeCount++;
+    }
+
     @BatchSize(size = 100)
     @OneToMany(mappedBy = "restaurant")
     List<Hours> hoursList = new ArrayList<>();

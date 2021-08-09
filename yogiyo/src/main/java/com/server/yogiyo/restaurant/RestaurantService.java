@@ -8,6 +8,7 @@ import com.server.yogiyo.configure.security.authentication.CustomUserDetails;
 import com.server.yogiyo.restaurant.dto.DetailRestaurantRes;
 import com.server.yogiyo.restaurant.dto.LookupRestaurantRes;
 import com.server.yogiyo.restaurant.entity.AccountRestaurantRelation;
+import com.server.yogiyo.restaurant.entity.Restaurant;
 import com.server.yogiyo.restaurant.repository.AccountRestaurantRelationRepository;
 import com.server.yogiyo.restaurant.repository.RestaurantRepository;
 import lombok.RequiredArgsConstructor;
@@ -47,10 +48,24 @@ public class RestaurantService {
         detailRestaurantRes.setLike(false);
         if (customUserDetails != null) {
             Account account = customUserDetails.getAccount();
-            List<AccountRestaurantRelation> isLike = accountRestaurantRelationRepository.findByAccountAndRestaurantAndStatusAndIsLike(account, restaurantRepository.findById(id).get(), Valid, true);
-            if (isLike.size() > 0) detailRestaurantRes.setLike(true);
+            Optional<AccountRestaurantRelation> relation = accountRestaurantRelationRepository.findByAccountAndRestaurantAndStatus(account, restaurantRepository.findById(id).get(), Valid);
+            if (relation.isPresent()) detailRestaurantRes.setLike(relation.get().getIsLike());
         }
 
         return detailRestaurantRes;
+    }
+
+    @Transactional
+    public void createLikeRelationByAccount(CustomUserDetails customUserDetails, Long restaurantId) {
+        Account account = customUserDetails.getAccount();
+        Restaurant restaurant = restaurantRepository.findById(restaurantId)
+                .orElseThrow(() -> new CustomException(CustomExceptionStatus.Restaurant_NOT_FOUND));
+        Optional<AccountRestaurantRelation> relation =  accountRestaurantRelationRepository.findByAccountAndRestaurantAndStatus(account, restaurant, Valid);
+        if (relation.isPresent()) {
+            relation.get().setLike(!relation.get().getIsLike());
+        }
+        else{
+            accountRestaurantRelationRepository.save(new AccountRestaurantRelation(account, restaurant));
+        }
     }
 }

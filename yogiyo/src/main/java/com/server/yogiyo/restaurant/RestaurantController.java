@@ -1,5 +1,6 @@
 package com.server.yogiyo.restaurant;
 
+import com.server.yogiyo.configure.response.CommonResponse;
 import com.server.yogiyo.configure.response.DataResponse;
 import com.server.yogiyo.configure.response.ResponseService;
 import com.server.yogiyo.configure.security.authentication.CustomUserDetails;
@@ -44,4 +45,11 @@ public class RestaurantController {
         DetailRestaurantRes restaurant = restaurantService.getDetailRestaurant(customUserDetails, id);
         return responseService.getDataResponse(restaurant);
     }
+
+    @PostMapping(value = "/restaurants/{restaurantId}/accounts/auth/like")
+    public CommonResponse createLikeRelationByAccount(@AuthenticationPrincipal CustomUserDetails customUserDetails, @PathVariable(name = "restaurantId") Long restaurantId) {
+        restaurantService.createLikeRelationByAccount(customUserDetails, restaurantId);
+        return responseService.getSuccessResponse();
+    }
+
 }
