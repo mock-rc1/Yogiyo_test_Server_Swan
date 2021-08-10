@@ -150,6 +150,13 @@ https://prod.yogiyo-backend.shop
   - 로그인한 상태에서 가게 세부 조회를 하면 계정의 찜 여부 데이터를 전송
 - 인증된 계정에서 가게 좋아요 추가 or 취소 기능 API 완성
 
+### 2021-08-10 진행상황
+- - -
+- Account Table 및 관련 Entity 수정
+- 카카오 OAuth 로그인 기능 완성
+  - JSON Parser 라이브러리 추가
+  - 콜백 URL로 인가토큰이 전달된 후 카카오 로그인이 되는 기능
+
 ## Author
 
 👤 **vividswan**
