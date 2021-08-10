@@ -47,6 +47,8 @@ public class Account extends BaseTimeEntity {
     @Enumerated(EnumType.STRING)
     private RoleType role;
 
+    private Long kakaoId;
+
     private boolean alarmAgree;
 
     public static Account createAccount(AccountAuthDto dto) {
@@ -71,6 +73,11 @@ public class Account extends BaseTimeEntity {
                 .nickname(this.nickname)
                 .alarmAgree(this.alarmAgree)
                 .build();
+    }
+
+    public void setKakaoInfoByEmail(Long kakaoId) {
+        this.kakaoId = kakaoId;
+        this.oAuth = OAuthType.Kakao;
     }
 
 }
