@@ -95,6 +95,7 @@ https://prod.yogiyo-backend.shop
   - 페이징 된 전체 가게 조회 API
   - 가게 세부 내용 조회 API
 - 가게 관련 테스트 데이터 생성
+- ERD : Event Table 추가
 
 ### 2021-08-04 진행상황
 - - -
@@ -107,6 +108,7 @@ https://prod.yogiyo-backend.shop
   - JWT 토큰 유효시간
   - application-key 관련 코드
   - 주문 추가 오류
+- ERD : Event Table에 isAd(TINYINT) 칼럼 추가
 
 ### 2021-08-05 진행상황
 - - -
@@ -121,13 +123,14 @@ https://prod.yogiyo-backend.shop
 - 주문 완료 Entity 및 관련 메서드에 주문 사용자 전화번호, 주소 추가
 - Exception Status 수정 및 보안
 - Feat 로그인 한 유저의 완료된 주문들 조회 API 완성
+- ERD : CompleteOrders Table에 accountPhoneNumber(VARCHAR(45)), accountAddress(VARCHAR(45)) 추가
 
 ### 2021-08-07 진행상황
 - - -
 - 전체 카테고리, 메뉴 카테고리 조회 API 완성
 - Enum Type에 관련된 오류 수정
 - 카테고리로 가게 리스트 조회, 메뉴 리스트 조회 API 완성
-- API 문서 최신화
+- ERD : Category Table에 isFood(TINYINT) 추가
 
 ### 2021-08-08 진행상황
 - - -
@@ -156,6 +159,7 @@ https://prod.yogiyo-backend.shop
 - 카카오 OAuth 로그인 기능 완성
   - JSON Parser 라이브러리 추가
   - 콜백 URL로 인가토큰이 전달된 후 카카오 로그인이 되는 기능
+- ERD : Account Table에 KakaoId(BIGINT) 칼럼 추가
 
 ### 2021-08-11 진행상황
 - - -
@@ -163,6 +167,7 @@ https://prod.yogiyo-backend.shop
 - SMS 전달 서비스와 프로젝트 연결
 - SMS 인증 토큰 생성 API 완성
 - 토큰으로 해당 계정 SMS 인증 처리 API 완성
+- ERD : Account Table에 smsAuthToken(INTEGER), isSmsCertified(TINYINT) 칼럼 추가
 
 ## Author
 
