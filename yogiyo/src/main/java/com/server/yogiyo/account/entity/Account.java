@@ -51,6 +51,10 @@ public class Account extends BaseTimeEntity {
 
     private boolean alarmAgree;
 
+    private Integer smsAuthToken;
+
+    private boolean isSmsCertified;
+
     public static Account createAccount(AccountAuthDto dto) {
 
         return Account.builder()
@@ -62,6 +66,7 @@ public class Account extends BaseTimeEntity {
                 .oAuth(OAuthType.None)
                 .role(RoleType.ROLE_USER)
                 .alarmAgree(dto.getAlarmAgree())
+                .isSmsCertified(false)
                 .build();
     }
 
@@ -80,4 +85,15 @@ public class Account extends BaseTimeEntity {
         this.oAuth = OAuthType.Kakao;
     }
 
+    public void setSmsAuthToken(Integer smsAuthToken) {
+        this.smsAuthToken = smsAuthToken;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setSmsCertified(boolean smsCertified) {
+        isSmsCertified = smsCertified;
+    }
 }
