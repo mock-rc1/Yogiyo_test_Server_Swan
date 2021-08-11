@@ -157,6 +157,13 @@ https://prod.yogiyo-backend.shop
   - JSON Parser 라이브러리 추가
   - 콜백 URL로 인가토큰이 전달된 후 카카오 로그인이 되는 기능
 
+### 2021-08-11 진행상황
+- - -
+- 계정 SMS 인증 관련 라이브러리, 예외 Status Enum 추가
+- SMS 전달 서비스와 프로젝트 연결
+- SMS 인증 토큰 생성 API 완성
+- 토큰으로 해당 계정 SMS 인증 처리 API 완성
+
 ## Author
 
 👤 **vividswan**
