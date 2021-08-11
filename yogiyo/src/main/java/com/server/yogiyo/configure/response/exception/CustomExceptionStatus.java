@@ -75,6 +75,9 @@ public enum CustomExceptionStatus {
     DUPLICATED_NICKNAME(false, 3014, "중복된 닉네임입니다."),
     DUPLICATED_NICKNAME_SELF(false, 3015, "원래의 닉네임과 중복됩니다."),
     FAILED_TO_LOGIN(false,3016,"없는 이메일이거나 비밀번호가 틀렸습니다."),
+    ALREADY_CERTIFICATION_ACCOUNT(false,3017,"이미 인증된 유저입니다."),
+    FAILED_TO_CERTIFICATION(false,3018,"유효한 토큰 값이 아닙니다."),
+    FAILED_TO_RECEPTION(false,3019,"유효한 수신 번호가 아닙니다."),
 
 
 

@@ -34,6 +34,9 @@ dependencies {
 
 	// JSON Parser
 	implementation group: 'org.json', name: 'json', version: '20210307'
+
+	// SMS Service
+	implementation group: 'net.nurigo', name: 'javaSDK', version: '2.2'
 }
 
 test {
