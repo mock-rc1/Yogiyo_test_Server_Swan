@@ -40,6 +40,7 @@ public class OrdersService {
 
     @Transactional
     public Long createOrders(CustomUserDetails customUserDetails, Long restaurantId, Long menuId, List<Long> optionsIdList) {
+
         Account account = customUserDetails.getAccount();
         Restaurant restaurant = restaurantRepository.findByRestaurantIdAndStatus(restaurantId, Valid)
                 .orElseThrow(() -> new CustomException(CustomExceptionStatus.Restaurant_NOT_FOUND));
@@ -55,7 +56,8 @@ public class OrdersService {
         for (Long id : optionsIdList) {
             Options options = optionsRepository.findByOptionsIdAndStatus(id, Valid)
                     .orElseThrow(() -> new CustomException(CustomExceptionStatus.OPTIONS_NOT_FOUND));
-            orders.addOptions(options);
+            Options orderOptions = Options.createOrderOptions(orders, options);
+            orders.addOptions(orderOptions);
         }
 
         return save.getOrdersId();
