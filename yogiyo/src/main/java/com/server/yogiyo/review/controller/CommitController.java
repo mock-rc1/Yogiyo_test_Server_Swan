@@ -17,14 +17,14 @@ public class CommitController {
     private final CommentService commentService;
     private final ResponseService responseService;
 
-    @PostMapping("/reviews/{reviewId}/comments")
+    @PostMapping("/reviews/{reviewId}/accounts/auth/comments")
     public DataResponse<Long> createParentComment(@AuthenticationPrincipal CustomUserDetails customUserDetails,
                                                   @PathVariable(name = "reviewId") Long reviewId, @RequestBody PostCommentReq req) {
         Long commentId = commentService.createParentComment(customUserDetails, reviewId, req);
         return responseService.getDataResponse(commentId);
     }
 
-    @PostMapping("/comments/{commentId}/nested-comments")
+    @PostMapping("/comments/{commentId}/accounts/auth/nested-comments")
     public DataResponse<Long> createNestedComment(@AuthenticationPrincipal CustomUserDetails customUserDetails,
                                                   @PathVariable(name = "commentId") Long commentId, @RequestBody PostCommentReq req) {
         Long nestedCommentId = commentService.createNestedComment(customUserDetails, commentId, req);
