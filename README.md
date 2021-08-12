@@ -79,7 +79,7 @@ https://prod.yogiyo-backend.shop
 
 ### 2021-08-02 진행상황
 - - -
-- [ERD v1 완성](https://user-images.githubusercontent.com/54254402/127853971-cd688a19-347c-4fcb-bedd-f146e7646d53.png)
+- [ERD](https://user-images.githubusercontent.com/54254402/129259180-1db87916-e437-4753-8bd7-19920fa15139.png)
 - 공통 Reponse 처리 기능 추가
 - 예외처리 기능 추가 및 예외처리 코드 Enum 생성
 - Spring Security를 사용하는 Authentication 기능 추가
@@ -169,12 +169,18 @@ https://prod.yogiyo-backend.shop
 - 토큰으로 해당 계정 SMS 인증 처리 API 완성
 - ERD : Account Table에 smsAuthToken(INTEGER), isSmsCertified(TINYINT) 칼럼 추가
 
-### 2021-08-11 진행상황
+### 2021-08-12 진행상황
 - - -
 - Naver Direction 5 API 서버에 적용 (두 좌표간의 최소 거리)
 - Naver geocoding API 서버에 적용 (주소에 대한 좌표 출력)
 - 좌표를 찾는 과정에서 유효한 주소가 아닐 때 Exception에 대한 처리
 - 좌표 출력 API, 로그인 한 사용자와 가게의 거리 출력 API 완성
+
+### 2021-08-12 진행상황
+- - -
+- 인증이 필요한 컨트롤러 메소드 URL 변경
+- 주문 생성 오류 해결(DTO 생성자 사용)
+- README에 ERD 최신화
 
 ## Author
 
