@@ -1,6 +1,5 @@
 package com.server.yogiyo.util.location;
 
-import lombok.RequiredArgsConstructor;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
@@ -9,7 +8,6 @@ import org.springframework.web.client.RestTemplate;
 
 import java.text.DecimalFormat;
 
-@RequiredArgsConstructor
 @Component
 public class NaverDirection5 {
 
