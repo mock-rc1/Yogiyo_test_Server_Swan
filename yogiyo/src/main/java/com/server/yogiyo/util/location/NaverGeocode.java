@@ -1,5 +1,8 @@
 package com.server.yogiyo.util.location;
 
+import com.server.yogiyo.configure.response.exception.CustomException;
+import com.server.yogiyo.configure.response.exception.CustomExceptionStatus;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
@@ -28,7 +31,9 @@ public class NaverGeocode {
         HttpStatus httpStatus = responseEntity.getStatusCode();
         int status = httpStatus.value();
         String response = responseEntity.getBody();
-        JSONObject addresses = new JSONObject(new JSONObject(response).getJSONArray("addresses").get(0).toString());
+        JSONArray addressesArray = new JSONObject(response).getJSONArray("addresses");
+        if (addressesArray.length() == 0) throw new CustomException(CustomExceptionStatus.LOCATION_NOT_VALID);
+        JSONObject addresses = new JSONObject(addressesArray.get(0).toString());
         String x = addresses.get("x").toString();
         String y = addresses.get("y").toString();
         return x + "," + y;

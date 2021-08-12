@@ -79,6 +79,9 @@ public enum CustomExceptionStatus {
     FAILED_TO_CERTIFICATION(false,3018,"유효한 토큰 값이 아닙니다."),
     FAILED_TO_RECEPTION(false,3019,"유효한 수신 번호가 아닙니다."),
 
+    // Location
+    LOCATION_NOT_VALID(false,3030,"유효한 주소가 아닙니다."),
+
 
 
     /**
