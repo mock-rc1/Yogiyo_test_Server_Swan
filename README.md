@@ -169,6 +169,13 @@ https://prod.yogiyo-backend.shop
 - 토큰으로 해당 계정 SMS 인증 처리 API 완성
 - ERD : Account Table에 smsAuthToken(INTEGER), isSmsCertified(TINYINT) 칼럼 추가
 
+### 2021-08-11 진행상황
+- - -
+- Naver Direction 5 API 서버에 적용 (두 좌표간의 최소 거리)
+- Naver geocoding API 서버에 적용 (주소에 대한 좌표 출력)
+- 좌표를 찾는 과정에서 유효한 주소가 아닐 때 Exception에 대한 처리
+- 좌표 출력 API, 로그인 한 사용자와 가게의 거리 출력 API 완성
+
 ## Author
 
 👤 **vividswan**
