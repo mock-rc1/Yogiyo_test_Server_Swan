@@ -14,10 +14,6 @@
 
 > Yogiyo Back-End Project
 
-### 🏠 [Homepage](https://github.com/mock-rc1/Yogiyo_test_Server_Swan)
-
-### ✨ [Demo](https://prod.yogiyo-backend.shop)
-
 ### 📘 [API DOCUMENT](https://docs.google.com/spreadsheets/d/1s8GNufaq29cz1syn87m0NE5NpaMzJrwugm5NDU_7r5k/edit?usp=sharing)
 
 ## 기술스택
